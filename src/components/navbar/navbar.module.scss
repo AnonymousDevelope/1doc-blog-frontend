@@ -1,0 +1,6 @@
+.navbar{
+    @apply dark:text-foreground;
+    li{
+        @apply mx-0;
+    }
+}
