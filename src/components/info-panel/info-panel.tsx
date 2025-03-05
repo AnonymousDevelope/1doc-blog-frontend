@@ -31,17 +31,17 @@ const InfoPanel = () => {
         <div className="flex flex-row items-center">
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline">Bog'lanish</Button>
+              <Button variant="outline">Bog&apos;lanish</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle>Biz bilan bog'lanish</DialogTitle>
-                <DialogDescription>Biz bilan bog'lanish uchun ma'lumotlaringizni kiriting.</DialogDescription>
+                <DialogTitle>Biz bilan bog&apos;lanish</DialogTitle>
+                <DialogDescription>Biz bilan bog&apos;lanish uchun ma&apos;lumotlaringizni kiriting.</DialogDescription>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="fio">To'liq ism</Label>
-                  <Input id="fio" placeholder="To'liq ism sharifingiz ..." required />
+                  <Label htmlFor="fio">To&apos;liq ism</Label>
+                  <Input id="fio" placeholder="To&apos;liq ism sharifingiz ..." required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="tel">Telefon raqam</Label>
@@ -51,20 +51,20 @@ const InfoPanel = () => {
                   <DialogClose asChild>
                     <Button type="button" variant="secondary">Yopish</Button>
                   </DialogClose>
-                  <Button type="submit" variant="default">Jo'natish</Button>
+                  <Button type="submit" variant="default">Jo&apos;natish</Button>
                 </DialogFooter>
               </form>
               <div className="flex flex-col gap-4 items-center">
-                <span>Qo'shimcha bog'lanish uchun</span>
+                <span>Qo&apos;shimcha bog&apos;lanish uchun</span>
                 <div className="flex gap-4">
                   <Link href="https://t.me/techsupportuz" target="_blank">
-                    <Button variant="ghost" asChild>
-                      <BsTelegram size={40} />
+                    <Button variant="ghost" className="px-4 py-2">
+                      <BsTelegram className="!h-[30px] !w-[30px]" />
                     </Button>
                   </Link>
                   <Link href="tel:+99899999999">
-                    <Button variant="ghost" asChild>
-                      <PhoneCallIcon size={40} />
+                    <Button variant="ghost" className="px-4 py-2">
+                      <PhoneCallIcon className="!h-[30px] !w-[30px]" />
                     </Button>
                   </Link>
                 </div>

@@ -9,6 +9,16 @@ export default {
   ],
   theme: {
   	extend: {
+		screens:{
+			xs:'480px',
+			sm:'640px',
+			md:'768px',
+			lg:'1024px',
+			xl:'1280px',
+		},
+		fontFamily:{
+			roboto:['Roboto', 'sans-serif']
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -58,5 +68,6 @@ export default {
   		}
   	}
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

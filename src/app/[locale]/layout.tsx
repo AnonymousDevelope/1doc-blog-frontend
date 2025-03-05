@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Footer, InfoPanel, Navbar } from "@/components";
+import { Direction, Footer, InfoPanel, Navbar } from "@/components";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { LanguageProvider } from "@/context/language.context";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,18 +32,21 @@ export default async function RootLayout({
   return (
     <html lang={locale} data-theme="light" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} sm:overflow-hidden antialiased  !px-4 !py-5 text-black dark:bg-background dark:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} sm:overflow-x-hidden antialiased !px-4 !py-5 text-black dark:bg-background dark:text-white`}
       >
-        <NextIntlClientProvider locale="uz" messages={messages}>
-          <div className="flex flex-col w-full gap-3">
-            <InfoPanel />
-            <Navbar />
-            {children}
-            <footer className="flex w-full">
-              <Footer />
-            </footer>
-          </div>
-        </NextIntlClientProvider>
+        <LanguageProvider>
+          <NextIntlClientProvider locale="uz" messages={messages}>
+            <div className="flex flex-col w-full gap-3">
+              <InfoPanel />
+              <Navbar />
+              <Direction />
+              {children}
+              <footer className="flex w-full">
+                <Footer />
+              </footer>
+            </div>
+          </NextIntlClientProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
