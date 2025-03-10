@@ -1,0 +1,18 @@
+.career {
+    height: 350px;
+    width: 100%;
+    @apply bg-blue-300 px-10 py-2 dark:bg-gray-800;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        height: auto;
+    }
+
+    @media (max-width: 480px) {
+        padding: 5px;
+    }
+}

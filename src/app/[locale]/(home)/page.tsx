@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link as LinkNavigation } from "@/i18n/navigation";
 import Link from "next/link";
 import { PhoneCallIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -126,18 +127,15 @@ const Page = () => {
             </Button>
           </div>
         </div>
-        <div className="mx-auto w-[300px] h-auto rounded-lg">
-          <video
-            className="w-full h-full object-cover rounded-md"
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="https://blog.trustme.kz/wp-content/themes/ceremony/version_2/images/posters/main.png"
-          >
-            <source src="your-video-url.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+        <div className="mx-auto w-[600px] h-auto rounded-lg">
+          <Image
+            src="/home/header.png"
+            alt="Hero Image"
+            width={600} // Kattaroq kenglik
+            height={600} // Kattaroq balandlik
+            quality={100} // Maksimal sifat (default 75)
+            className="rounded-lg object-cover"
+          />
         </div>
       </section>
       <section className="flex flex-col px-5 py-12 bg-background">
@@ -169,6 +167,11 @@ const Page = () => {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="flex flex-row justify-center mt-10">
+            <Button variant={"outline"} className="rounded-full border-2 mx-auto" size={"lg"}>
+              <LinkNavigation href={"/blog"}>Barchasini ko&apos;rish</LinkNavigation>
+            </Button>
           </div>
         </div>
       </section>

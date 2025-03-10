@@ -11,7 +11,6 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<"light" | "dark">("dark"); // Default holat
-
   useEffect(() => {
     // LocalStorage dan oldingi tanlovni olish
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
@@ -33,7 +32,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     document.body.classList.add(theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme: () => void = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 

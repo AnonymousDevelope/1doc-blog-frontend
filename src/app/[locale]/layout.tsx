@@ -4,9 +4,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Direction, Footer, InfoPanel, Navbar, ThemeWrapper } from "@/components";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
+import {getMessages } from "next-intl/server";
 import { LanguageProvider } from "@/context/language.context";
-import { ThemeProvider, useTheme } from "@/context/theme.context"; // Theme kontekstini import qilish
+import { ThemeProvider } from "@/context/theme.context"; // Theme kontekstini import qilish
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 
@@ -35,7 +35,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
-  if (!routing.locales.includes(locale)) {
+  if (!routing.locales.includes(locale as "uz" | "ru" | "en")) {
     notFound();
   }
   const messages = await getMessages();

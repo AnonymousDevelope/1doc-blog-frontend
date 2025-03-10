@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { BsCalendar, BsClock, BsEye } from "react-icons/bs";
 
 interface News {
   id: number;
@@ -28,9 +29,8 @@ const CardBlog: React.FC<CardBlogProps> = ({ news, size }) => {
 
   return (
     <div
-      className={`rounded-md bg-white dark:bg-gray-800 shadow-md overflow-hidden h-auto cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
-        size === "large" ? "flex flex-col" : "flex flex-col sm:flex-row"
-      }`}
+      className={`rounded-md bg-white dark:bg-gray-800 shadow-md overflow-hidden h-auto cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${size === "large" ? "flex flex-col" : "flex flex-col sm:flex-row"
+        }`}
       onClick={handleCardClick} // Klik hodisasi qo'shildi
     >
       <div className={`w-full ${size === "large" ? "" : "sm:w-1/3"}`}>
@@ -39,22 +39,19 @@ const CardBlog: React.FC<CardBlogProps> = ({ news, size }) => {
           alt={news.title}
           width={size === "large" ? 400 : 150}
           height={size === "large" ? 300 : 150}
-          className={`w-full h-auto object-cover aspect-[4/3] ${
-            size === "large" ? "" : "sm:h-full"
-          }`}
+          className={`w-full h-auto object-cover aspect-[4/3] ${size === "large" ? "" : "sm:h-full"
+            }`}
         />
       </div>
       <div
-        className={`w-full ${
-          size === "large"
+        className={`w-full ${size === "large"
             ? "p-4 flex flex-col justify-between flex-grow"
             : "sm:w-2/3 p-4 flex flex-col justify-between"
-        }`}
+          }`}
       >
         <h3
-          className={`${
-            size === "large" ? "text-xl" : "text-lg"
-          } font-medium text-gray-900 dark:text-gray-100`}
+          className={`${size === "large" ? "text-xl" : "text-lg"
+            } font-medium text-gray-900 dark:text-gray-100`}
         >
           {news.title}
         </h3>
@@ -72,8 +69,11 @@ const CardBlog: React.FC<CardBlogProps> = ({ news, size }) => {
           ))}
         </div>
         <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
-          <span>{news.publish_date}</span>
-          <span>{news.max_read_time}</span>
+          <span className="flex flex-row gap-2 items-center"><BsCalendar />{news.publish_date}</span>
+          <div className="flex flex-row gap-3 items-center">
+            <span className="flex flex-row gap-2 items-center"><BsEye className="scale-150" />{23}</span>
+            <span className="flex flex-row gap-2 items-center"><BsClock className="scale-110" />{news.max_read_time}</span>
+          </div>
         </div>
       </div>
     </div>

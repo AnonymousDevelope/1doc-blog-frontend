@@ -2,6 +2,7 @@
 import React from 'react';
 import { usePathname, useParams } from 'next/navigation'; // Next.js app router hooklari
 import styles from './direction.module.scss';
+import { Dot, DotIcon } from 'lucide-react';
 
 const Direction = () => {
   const pathname = usePathname(); // Joriy yo'lni oladi (masalan, "/en/home/faq")
@@ -25,13 +26,13 @@ const Direction = () => {
 
   return (
     <nav className={styles.direction}>
-      {paths.map((path, index) => (
+      {paths.length>1 && paths.map((path, index) => (
         <span key={index} className={styles.pathItem}>
           <a href={path.url} className={styles.link}>
             {path.label}
           </a>
           {index < paths.length - 1 && (
-            <span className={styles.separator}>&gt;</span>
+            <span className={styles.separator}><DotIcon className='m-0 scale-110'/></span>
           )}
         </span>
       ))}

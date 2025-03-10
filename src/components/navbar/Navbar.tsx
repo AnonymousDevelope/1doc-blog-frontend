@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./navbar.module.scss";
 import Image from "next/image";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { useRouter, usePathname, Link } from "@/i18n/navigation"; // navigation.ts dan import
-import { useLocale } from "next-intl"; // useLocale ni import qilish
+import { useRouter, usePathname, Link } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
 import { Button } from "../ui/button";
 import { useLanguage } from "@/context/language.context";
 import { MoonIcon, SunIcon } from "lucide-react";
@@ -21,10 +21,9 @@ const Navbar = () => {
   const { language: contextLanguage, changeLanguage } = useLanguage();
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useLocale(); // useLocale bilan joriy locale ni olish
+  const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  // Tilni URLdan olish va context bilan sinxronlashtirish
   const selectedLanguage = locale;
 
   useEffect(() => {
@@ -33,29 +32,36 @@ const Navbar = () => {
     }
   }, [selectedLanguage, contextLanguage, changeLanguage]);
 
-  // Til o'zgarganda URLni yangilash
   const handleLanguageChange = (lang: string) => {
-    const cleanPathname = pathname.replace(`/${locale}`, ""); // Joriy locale ni olib tashlash
-    router.push(cleanPathname || "/", { locale: lang }); // Agar yo‘l bo‘sh bo‘lsa, root ga yo‘naltirish
+    const cleanPathname = pathname.replace(`/${locale}`, "");
+    router.push(cleanPathname || "/", { locale: lang });
     changeLanguage(lang);
   };
-  // Navbar elementlari (locale'siz)
+
   const navbarItems: NavbarItem[] = [
     { id: 1, name: "Home", link: "/" },
     { id: 2, name: "FAQ", link: "/faq" },
-    { id: 3, name: "News", link: "/news" },
+    { id: 3, name: "Blog", link: "/blog" },
     { id: 4, name: "Career", link: "/career" },
   ];
 
-  // Active holatni tekshirish
   const isActive = (link: string) => {
-    const normalizedPathname = pathname.replace(`/${locale}`, "").replace(/\/$/, ""); // locale va trailing slashni olib tashlash
-    const normalizedLink = link.replace(/\/$/, ""); // trailing slashni olib tashlash
-    return normalizedPathname === normalizedLink || (normalizedPathname === "" && link === "");
+    const normalizedPathname = pathname.replace(`/${locale}`, "").replace(/\/$/, "");
+    const normalizedLink = link.replace(/\/$/, "");
+
+    // Root sahifa uchun aniq tekshiruv
+    if (normalizedLink === "") {
+      return normalizedPathname === ""; // Faqat root yo‘lda active
+    }
+
+    // Boshqa sahifalar uchun startsWith tekshiruvi
+    return normalizedPathname.startsWith(normalizedLink) && normalizedPathname !== "";
   };
 
   return (
-    <nav className={`${styles.navbar} sticky top-0 border-b-2 border-background bg-background dark:border-gray-800 shadow-md dark:shadow-gray-800/50 z-50`}>
+    <nav
+      className={`${styles.navbar} sticky top-0 border-b-2 border-background bg-background dark:border-gray-800 shadow-md dark:shadow-gray-800/50 z-50`}
+    >
       <Button
         variant="outline"
         size="icon"
@@ -74,13 +80,14 @@ const Navbar = () => {
         </div>
         {/* Navigation Links */}
         <ul
-          className={`sm:flex sm:gap-8 sm:items-center max-sm:absolute max-sm:top-full max-sm:left-0 max-sm:w-2/3 max-sm:mt-5 max-sm:flex-col max-sm:p-4 max-sm:rounded-lg max-sm:border dark:max-sm:border-gray-800 max-sm:bg-gray-50 max-sm:dark:bg-gray-900 sm:bg-transparent max-sm:shadow-md dark:max-sm:shadow-gray-700/50 transition-all duration-300 ease-in-out ${isMenuOpen ? "max-sm:translate-x-0" : "max-sm:-translate-x-[calc(100%+20px)]"
-            }`}
+          className={`sm:flex sm:gap-8 sm:items-center max-sm:absolute max-sm:top-full max-sm:left-0 max-sm:w-2/3 max-sm:mt-5 max-sm:flex-col max-sm:p-4 max-sm:rounded-lg max-sm:border dark:max-sm:border-gray-800 max-sm:bg-gray-50 max-sm:dark:bg-gray-900 sm:bg-transparent max-sm:shadow-md dark:max-sm:shadow-gray-700/50 transition-all duration-300 ease-in-out ${
+            isMenuOpen ? "max-sm:translate-x-0" : "max-sm:-translate-x-[calc(100%+20px)]"
+          }`}
         >
           {navbarItems.map((item) => (
             <li key={item.id}>
               <Link
-                href={item.link} // `/${locale}/${item.link}` o‘rniga faqat `item.link`
+                href={item.link}
                 className={`text-lg hover:text-gray-600 ${isActive(item.link) ? styles.active : ""}`}
               >
                 {item.name}
