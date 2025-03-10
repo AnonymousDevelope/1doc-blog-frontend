@@ -1,114 +1,85 @@
 .home {
+  $gradient: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+  $dark-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
 
-  // Continuous slider section
   .continuous-slider {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
+    @apply w-full overflow-hidden relative;
 
-    // Left shadow (entry side) with wider spread
-    &::before {
+    &::before,
+    &::after {
+      @apply absolute top-0 w-[200px] h-full z-10 pointer-events-none;
       content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200px; // Increased width for more spread
-      height: 100%;
-      background: linear-gradient(to right,
-          rgba(0, 0, 0, 0.7), // Full black at start
-          rgba(0, 0, 0, 0.5) 50%, // Gradual fade
-          rgba(0, 0, 0, 0) 100% // Fully transparent at end
-        );
-      z-index: 10;
-      pointer-events: none;
     }
 
-    // Right shadow (exit side) with wider spread
+    &::before {
+      @apply left-0;
+      background: $gradient;
+    }
+
     &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 200px; // Increased width for more spread
-      height: 100%;
-      background: linear-gradient(to left,
-          rgba(0, 0, 0, 0.7), // Full black at start
-          rgba(0, 0, 0, 0.5) 50%, // Gradual fade
-          rgba(0, 0, 0, 0) 100% // Fully transparent at end
-        );
-      z-index: 10;
-      pointer-events: none;
+      @apply right-0;
+      background: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    // Dark mode uchun gradientlar
+    .dark & {
+      &::before {
+        background: $dark-gradient;
+      }
+
+      &::after {
+        background: linear-gradient(to left, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+      }
     }
   }
 
-  // Slider container section
   .slider-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: relative;
+    @apply flex gap-4 relative items-center justify-center md:justify-start;
     h3 {
-      font-size: 4rem;
-      font-weight: bold;
+      @apply text-3xl sm:text-4xl lg:text-[4rem] font-bold;
     }
     .words {
-      height: 3rem;
-      background: rgba(0, 0, 0, 0.5);
-      line-height: 2rem;
-      overflow: hidden;
-      position: relative;
-      width: 200px;
-      margin-top:20px;
-      text-align: center;
+      @apply h-12 leading-8 overflow-hidden relative w-1/2 mt-5;
       span {
-        display: block;
-        position: absolute;
-        width: 100%;
-        font-size: 40px;
-        white-space: nowrap;
+        @apply block absolute w-full text-3xl lg:text-[40px] whitespace-nowrap;
         opacity: 0;
         animation: slide 8s infinite;
+
         @for $i from 1 through 4 {
           &:nth-child(#{$i}) {
-            animation-delay: #{$i * 2 - 2}s;
+            animation-delay: #{($i * 2) - 2}s;
           }
         }
       }
     }
-
   }
-  // Sliding text animation
-  @keyframes slide {
 
-    0%,
-    25% {
+  @keyframes slide {
+    0%, 25% {
       opacity: 0;
       transform: translateY(100%);
     }
 
-    25%,
-    50% {
+    25%, 50% {
       opacity: 1;
       transform: translateY(0);
     }
 
-    50%,
-    100% {
+    50%, 100% {
       opacity: 0;
       transform: translateY(-100%);
     }
   }
-  // Scrolling slider track
+
   .slider-track {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    @apply flex gap-4;
     animation: scroll 15s linear infinite;
   }
+
   .slide {
-    flex: 0 0 auto;
-    margin-right: 1rem;
+    @apply flex-shrink-0 mr-4;
   }
+
   @keyframes scroll {
     0% {
       transform: translateX(0);
@@ -116,29 +87,6 @@
 
     100% {
       transform: translateX(-50%);
-    }
-  }
-
-  // Opportunities card section
-  section {
-    .card-oportunity {
-      @apply flex md:flex-col sm:flex-col lg:flex-row items-center gap-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 transition-all duration-100 py-2 cursor-pointer;
-
-      img:hover {
-        @apply transform scale-125 transition-transform ease-in-out duration-300;
-      }
-
-      .card-content {
-        @apply flex flex-col justify-between leading-normal sm:p-1 sm:w-full md:w-4/5 lg:w-3/5;
-
-        h3 {
-          @apply sm:text-center text-lg font-semibold text-gray-800 dark:text-gray-100;
-        }
-
-        p {
-          @apply text-sm text-gray-600 dark:text-gray-300;
-        }
-      }
     }
   }
 }

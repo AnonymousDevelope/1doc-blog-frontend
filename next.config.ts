@@ -6,4 +6,6 @@ const nextConfig: NextConfig = {
   
 };
 
-export default withNextIntl(nextConfig);
+export default withNextIntl({
+  ...nextConfig,
+});

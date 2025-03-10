@@ -1,18 +1,25 @@
+// src/app/[locale]/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Direction, Footer, InfoPanel, Navbar } from "@/components";
+import { Direction, Footer, InfoPanel, Navbar, ThemeWrapper } from "@/components";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { LanguageProvider } from "@/context/language.context";
+import { ThemeProvider, useTheme } from "@/context/theme.context"; // Theme kontekstini import qilish
+import { routing } from "@/i18n/routing";
+import { notFound } from "next/navigation";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -22,31 +29,38 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
-  const locale = await getLocale();
-  // Providing all messages to the client
-  // side is the easiest way to get started
+  const { locale } = await params;
+  if (!routing.locales.includes(locale)) {
+    notFound();
+  }
   const messages = await getMessages();
   return (
-    <html lang={locale} data-theme="light" className="dark">
+    <html lang={locale} style={{ ...geistSans.style, ...geistMono.style }}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} sm:overflow-x-hidden antialiased !px-4 !py-5 text-black dark:bg-background dark:text-white`}
+        className={`sm:overflow-x-hidden dark antialiased !px-4 !py-5 dark:bg-background dark:text-white`}
       >
-        <LanguageProvider>
-          <NextIntlClientProvider locale="uz" messages={messages}>
-            <div className="flex flex-col w-full gap-3">
-              <InfoPanel />
-              <Navbar />
-              <Direction />
-              {children}
-              <footer className="flex w-full">
-                <Footer />
-              </footer>
-            </div>
-          </NextIntlClientProvider>
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <ThemeWrapper>
+                <div className="flex flex-col w-full gap-3">
+                  <InfoPanel />
+                  <Navbar />
+                  <Direction />
+                  {children}
+                  <footer className="flex w-full">
+                    <Footer />
+                  </footer>
+                </div>
+              </ThemeWrapper>
+            </NextIntlClientProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,48 +1,58 @@
 .navbar {
-    @apply dark:text-foreground;
-  
-    // Container styling
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  
-    // Navigation list
-    ul {
-      @apply flex;
-      
-      li {
-        @apply mx-0;
-  
-        a {
-          @apply duration-150 transition-all ease-in-out no-underline;
-          position: relative;
-          padding: 0.5rem 0;
+  @apply flex items-center justify-between w-full text-foreground;
 
-          &::after {
-            content: '';
-            position: absolute;
+  ul {
+    @apply flex gap-6 max-sm:flex-col;
+
+    li {
+      a {
+        @apply transition-all duration-200 ease-in-out no-underline;
+        position: relative;
+        padding: 0.5rem 0;
+
+        // Desktop holat (border-bottom)
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 2px;
+          background-color: currentColor;
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 0.3s ease-in-out;
+
+          // Mobil holat (max-sm) uchun border-left
+          @media (max-width: 640px) {
             left: 0;
-            right: 0;
-            bottom: 0;
-            height: 2px;
-            background-color: currentColor;
-            transform: scaleX(0);
+            top: 0;
+            bottom: auto;
+            width: 2px;
+            height: 100%;
+            transform: scaleY(0);
             transform-origin: center;
             transition: transform 0.3s ease-in-out;
           }
-  
-          &:hover::after {
-            transform: scaleX(1);
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+          @media (max-width: 640px) {
+            transform: scaleY(1);
           }
-  
-          &.active {
-            @apply dark:text-foreground font-semibold;
-            &::after {
-              transform: scaleX(1);
+        }
+
+        &.active {
+          @apply text-blue-300 font-semibold max-sm:ps-3;
+          &::after {
+            transform: scaleX(1);
+            @media (max-width: 640px) {
+              transform: scaleY(1);
             }
           }
         }
       }
     }
   }
+}

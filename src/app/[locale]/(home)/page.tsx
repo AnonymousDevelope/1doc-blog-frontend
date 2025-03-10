@@ -11,11 +11,20 @@ import { Input } from "@/components/ui/input";
 import { BsTelegram } from "react-icons/bs";
 import Image from "next/image";
 import "./page.scss";
+import { useRouter } from "next/navigation";
+import CardOportunity from "./_components/card-oportunity/card-oportunity";
+interface CardOpportunity {
+  image: string,
+  title: string,
+  description: string
+}
 const Page = () => {
+  const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("Submitted");
   }
+
   const tags = [
     "Yuristlar",
     "Hujjatlar",
@@ -36,6 +45,23 @@ const Page = () => {
     { src: "/card-3.jpg", alt: "Business Solution 3", link: "#", title: "Solution 3", description: "Description for Solution 3" },
     { src: "/card-2.jpg", alt: "Business Solution 4", link: "#", title: "Solution 4", description: "Description for Solution 4" },
   ];
+  const card_oportunities: CardOpportunity[] = [
+    {
+      image: "/imkoniyatlar/imzo.png",
+      title: "1Doc - Imzo",
+      description: "1Doc - Biz bilan qanday ikoniyatlarga ega bo'lasiz"
+    },
+    {
+      image: "/imkoniyatlar/lock-doc.png",
+      title: "1Doc - Hujjat Lock",
+      description: "1Doc - Biz bilan qanday ikoniyatlarga ega bo'lasiz"
+    },
+    {
+      image: "/imkoniyatlar/ocr.png",
+      title: "1Doc - OCR",
+      description: "1Doc - Biz bilan qanday ikoniyatlarga ega bo'lasiz"
+    }
+  ]
   return (
     <div className="container home mx-auto px-4 dark:text-foreground transition-all ease-in-out delay-100">
       <section className="grid grid-cols-1 sm:grid-cols-[2fr_1.25fr] gap-8 items-center min-h-[80vh]">
@@ -49,7 +75,7 @@ const Page = () => {
               <span>natija!</span>
             </div>
           </div>
-          <div className="flex xs:flex-row">
+          <div className="flex xs:flex-row max-md:justify-center gap-3">
             <div className="flex flex-row items-center">
               <Dialog>
                 <DialogTrigger asChild>
@@ -94,6 +120,10 @@ const Page = () => {
                 </DialogContent>
               </Dialog>
             </div>
+            <Button variant="default" size={"sm"} className="!border-foreground min-h-[48px] min-w-[184px] text-[16px]" onClick={() => router.push('/blog')}>
+              <Link href={"/"}></Link>
+              Bloglar
+            </Button>
           </div>
         </div>
         <div className="mx-auto w-[300px] h-auto rounded-lg">
@@ -148,60 +178,11 @@ const Page = () => {
             1Doc - Biz bilan qanday ikoniyatlarga ega bo&apos;lasiz
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 px-12 sm:px-5 md:px-12">
-            <div className="card-oportunity">
-              <div className="w-2/5 h-full flex items-center">
-                <Image src="/imkoniyatlar/lock-doc.png" className="w-full" alt="1Doc Logo" width={100} height={100} />
-              </div>
-              <div className="card-content">
-                <h3 className="italic text-[21px] font-semibold text-foreground">1Doc yordamida hujjatlarni qulflash</h3>
-                <p className="mt-2 text-sm text-muted-foreground">Bu orqali siz hujjatingizni o&#39;zingiz istagandek ilovadan chiqmagan holda qulflash imkoniyatiga ega bolasiz</p>
-              </div>
-            </div>
-            <div className="card-oportunity">
-              <div className="w-2/5 h-full flex items-center">
-                <Image src="/imkoniyatlar/imzo.png" className="w-full" alt="1Doc Logo" width={100} height={100} />
-              </div>
-              <div className="card-content">
-                <h3 className="italic text-[21px] font-semibold text-foreground">1Doc yordamida hujjatlarni imzolash</h3>
-                <p className="mt-2 text-sm text-muted-foreground">Bu orqali siz hujjatingizni o&#39;zingiz istagandek ilovadan chiqmagan holda qulflash imkoniyatiga ega bolasiz</p>
-              </div>
-            </div>
-            <div className="card-oportunity">
-              <div className="w-2/5 h-full flex items-center">
-                <Image src="/imkoniyatlar/ocr.png" className="w-full" alt="1Doc Logo" width={100} height={100} />
-              </div>
-              <div className="card-content ">
-                <h3 className="italic text-[21px] font-semibold text-foreground">1Doc yordamida hujjatlarni imzolash</h3>
-                <p className="mt-2 text-sm  text-muted-foreground">Bu orqali siz hujjatingizni o&#39;zingiz istagandek ilovadan chiqmagan holda qulflash imkoniyatiga ega bolasiz</p>
-              </div>
-            </div>
-            <div className="card-oportunity">
-              <div className="w-2/5 h-full flex items-center">
-                <Image src="/imkoniyatlar/ocr.png" className="w-full" alt="1Doc Logo" width={100} height={100} />
-              </div>
-              <div className="card-content ">
-                <h3 className="italic text-[21px] font-semibold text-foreground">1Doc yordamida hujjatlarni imzolash</h3>
-                <p className="mt-2 text-sm text-muted-foreground">Bu orqali siz hujjatingizni o&#39;zingiz istagandek ilovadan chiqmagan holda qulflash imkoniyatiga ega bolasiz</p>
-              </div>
-            </div>
-            <div className="card-oportunity">
-              <div className="w-2/5 h-full flex items-center">
-                <Image src="/imkoniyatlar/ocr.png" className="w-full" alt="1Doc Logo" width={100} height={100} />
-              </div>
-              <div className="card-content ">
-                <h3 className="italic text-[21px] font-semibold text-foreground">1Doc yordamida hujjatlarni imzolash</h3>
-                <p className="mt-2 text-sm text-muted-foreground">Bu orqali siz hujjatingizni o&#39;zingiz istagandek ilovadan chiqmagan holda qulflash imkoniyatiga ega bolasiz</p>
-              </div>
-            </div>
-            <div className="card-oportunity">
-              <div className="w-2/5 h-full flex items-center">
-                <Image src="/imkoniyatlar/imzo.png" className="w-full" alt="1Doc Logo" width={100} height={100} />
-              </div>
-              <div className="card-content ">
-                <h3 className="italic text-[21px] font-semibold text-foreground">1Doc yordamida hujjatlarni imzolash</h3>
-                <p className="mt-2 text-sm text-muted-foreground">Bu orqali siz hujjatingizni o&#39;zingiz istagandek ilovadan chiqmagan holda qulflash imkoniyatiga ega bolasiz</p>
-              </div>
-            </div>
+            {
+              card_oportunities.map((card, index) => (
+                <CardOportunity key={index} image={card.image} title={card.title} description={card.description} />
+              ))
+            }
           </div>
         </div>
       </section >

@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    transition: all 0.3s ease-in-out;
     --roboto: "Roboto", san-serif;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;

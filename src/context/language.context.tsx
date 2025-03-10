@@ -1,16 +1,18 @@
-// context/LanguageContext.tsx
+// language.context.tsx
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
+import { useLocale } from "next-intl";
 
 interface LanguageContextType {
   language: string;
   changeLanguage: (lang: string) => void;
 }
 
-const LanguageContext = createContext<LanguageContextType | null>(null);
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const [language, setLanguage] = useState("uz");
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const locale = useLocale(); // next-intl dan joriy locale ni olish
+  const [language, setLanguage] = useState(locale);
 
   const changeLanguage = (lang: string) => {
     setLanguage(lang);
@@ -21,6 +23,12 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
       {children}
     </LanguageContext.Provider>
   );
-};
+}
 
-export const useLanguage = () => useContext(LanguageContext);
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
+}

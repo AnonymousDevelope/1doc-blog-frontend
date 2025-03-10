@@ -1,0 +1,7 @@
+.info-panel{
+    .info-list{
+        span{
+            @apply lg:text-[14px] dark:text-foreground text-[#4A4A4A];
+        }
+    }
+}
