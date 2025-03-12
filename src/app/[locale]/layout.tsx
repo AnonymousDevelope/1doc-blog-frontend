@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Direction, Footer, InfoPanel, Navbar, ThemeWrapper } from "@/components";
+import { Ad, Direction, Footer, InfoPanel, Navbar, ThemeWrapper } from "@/components";
 import { NextIntlClientProvider } from "next-intl";
 import {getMessages } from "next-intl/server";
 import { LanguageProvider } from "@/context/language.context";
@@ -49,6 +49,9 @@ export default async function RootLayout({
             <NextIntlClientProvider locale={locale} messages={messages}>
               <ThemeWrapper>
                 <div className="flex flex-col w-full gap-3">
+                  <div className="fixed top-1/2 left-1">
+                    <Ad />
+                  </div>
                   <InfoPanel />
                   <Navbar />
                   <Direction />

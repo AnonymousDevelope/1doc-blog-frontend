@@ -25,8 +25,8 @@ const news: News[] = [
   { id: 4, image: "/blog/no-image.png", max_read_time: "6 min", publish_date: "2025-02-20", small_description: "Stay safe online with these tips.", link: "/online-safety" }
 ];
 
-const Page = ({ params }: PageProps) => {
-  const { slug } = params;
+const Page = async ({ params }: PageProps) => {
+  const { slug } = await params;
   return (
     <section className="blogView">
       <header>
@@ -81,7 +81,7 @@ const Page = ({ params }: PageProps) => {
       {/* Advertisement or snippets */}
       <div className="mt-12">
         <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center">
-          <span className="text-gray-500 dark:text-gray-400">Reklama yoki parchalar uchun joy</span>
+          <Image src="/home/reklama.png" width={200} height={50} alt="Advertisement" />
         </div>
       </div>
     </section>
