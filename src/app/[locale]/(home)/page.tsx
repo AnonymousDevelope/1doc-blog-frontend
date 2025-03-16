@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { DialogContent, DialogClose, DialogHeader, DialogTrigger, Dialog, DialogDescription, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,6 +64,19 @@ const Page = () => {
       description: "1Doc - Biz bilan qanday ikoniyatlarga ega bo'lasiz"
     }
   ]
+  const words:string[] = [
+    "simplicity",
+    "innovation",
+    "accessibility",
+    "reliability",
+    "efficiency",
+    "trust",
+    "technology",
+    "transparency",
+    "empowerment",
+    "transformation",
+  ];
+  const t = useTranslations("home");
   return (
     <div className="container home mx-auto px-4 dark:text-foreground transition-all ease-in-out delay-100">
       <section className="grid grid-cols-1 sm:grid-cols-[2fr_1.25fr] gap-8 items-center min-h-[80vh]">
@@ -70,10 +84,11 @@ const Page = () => {
           <div className="slider-container">
             <h3>1Doc - </h3>
             <div className="words">
-              <span>creativlik,</span>
-              <span>innovatsiya,</span>
-              <span>motivatsiya,</span>
-              <span>natija!</span>
+              {
+                words.map((word, index) => (
+                  <span key={index}>{t(`slider.words.${word}`)}</span>
+                ))
+              }
             </div>
           </div>
           <div className="flex xs:flex-row max-md:justify-center gap-3">

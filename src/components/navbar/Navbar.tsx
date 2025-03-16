@@ -10,6 +10,7 @@ import { Button } from "../ui/button";
 import { useLanguage } from "@/context/language.context";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "@/context/theme.context";
+import { useTranslations } from "next-intl";
 
 interface NavbarItem {
   id: number;
@@ -18,6 +19,7 @@ interface NavbarItem {
 }
 
 const Navbar = () => {
+  const t = useTranslations("header"); // Tarjimalarni yuklash
   const { language: contextLanguage, changeLanguage } = useLanguage();
   const router = useRouter();
   const pathname = usePathname();
@@ -39,22 +41,20 @@ const Navbar = () => {
   };
 
   const navbarItems: NavbarItem[] = [
-    { id: 1, name: "Home", link: "/" },
-    { id: 2, name: "FAQ", link: "/faq" },
-    { id: 3, name: "Blog", link: "/blog" },
-    { id: 4, name: "Career", link: "/career" },
+    { id: 1, name: t("navbar.home"), link: "/" },
+    { id: 2, name: t("navbar.faq"), link: "/faq" },
+    { id: 3, name: t("navbar.blog"), link: "/blog" },
+    { id: 4, name: t("navbar.career"), link: "/career" },
   ];
 
   const isActive = (link: string) => {
     const normalizedPathname = pathname.replace(`/${locale}`, "").replace(/\/$/, "");
     const normalizedLink = link.replace(/\/$/, "");
 
-    // Root sahifa uchun aniq tekshiruv
     if (normalizedLink === "") {
-      return normalizedPathname === ""; // Faqat root yo‘lda active
+      return normalizedPathname === "";
     }
 
-    // Boshqa sahifalar uchun startsWith tekshiruvi
     return normalizedPathname.startsWith(normalizedLink) && normalizedPathname !== "";
   };
 
@@ -99,18 +99,20 @@ const Navbar = () => {
         <div className="flex flex-row items-center gap-3">
           <Select defaultValue={selectedLanguage} onValueChange={handleLanguageChange}>
             <SelectTrigger className="w-[140px] md:w-[180px]">
-              <SelectValue placeholder="Select Language" />
+              <SelectValue placeholder={t(`languages.${selectedLanguage}`)} />
             </SelectTrigger>
             <SelectContent>
               {[
-                { value: "uz", flag: "/uzbekistan-flag-icon.svg", label: "Uzbek" },
-                { value: "en", flag: "/united-kingdom-flag-icon.svg", label: "English" },
-                { value: "ru", flag: "/russia-flag-icon.svg", label: "Russian" },
+                { value: "uz", flag: "/uzbekistan-flag-icon.svg" },
+                { value: "en", flag: "/united-kingdom-flag-icon.svg" },
+                { value: "ru", flag: "/russia-flag-icon.svg" },
+                { value: "qq", flag: "/qaraqalpoq-flag-icon.svg" },
+                { value: "uz-kr", flag: "/uzbekistan-flag-icon.svg" },
               ].map((lang) => (
                 <SelectItem key={lang.value} value={lang.value}>
                   <div className="flex items-center gap-2">
-                    <Image src={lang.flag} alt={`${lang.label} flag`} height={20} width={20} />
-                    <span>{lang.label}</span>
+                    <Image src={lang.flag} alt={`${t(`languages.${lang.value}`)} flag`} height={20} width={20} />
+                    <span>{t(`languages.${lang.value}`)}</span>
                   </div>
                 </SelectItem>
               ))}

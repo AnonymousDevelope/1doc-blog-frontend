@@ -1,6 +1,7 @@
 "use client";
 import "./info-panel.scss";
 import React from 'react'
+import { useTranslations } from "next-intl";
 import { HeadphonesIcon, PhoneCallIcon, HourglassIcon } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "../ui/dialog";
 import { Button } from "../ui/button";
@@ -9,6 +10,7 @@ import { Input } from "../ui/input";
 import { BsTelegram } from "react-icons/bs";
 import Link from "next/link";
 const InfoPanel = () => {
+  const t = useTranslations("info_panel");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("Submitted");
@@ -19,20 +21,20 @@ const InfoPanel = () => {
         <div className="flex info-list max-sm:hidden  w-full gap-3 flex-row justify-between dark:text-foreground">
           <div className="flex flex-row items-center gap-4 py-2">
             <HeadphonesIcon className="text-gray-600" />
-            <span>Texnik yordamlar uchun +998 99 999 99 99</span>
+            <span>{t("support")} +998 99 999 99 99</span>
           </div>
           <div className="flex flex-row items-center gap-4 py-2">
             <PhoneCallIcon className="text-gray-600" />
-            <span className="">Texnik yordamlar uchun +998 99 999 99 09</span>
+            <span className="">{t("support")} +998 99 999 99 09</span>
           </div>
           <div className="flex flex-row items-center gap-4 py-2">
             <HourglassIcon className="text-gray-600 " />
-            <span>Ish vaqtimiz 8:00 - 18:00</span>
+            <span>{t("working_hours")} 8:00 - 18:00</span>
           </div>
           <div className="flex flex-row items-center">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline">Bog&apos;lanish</Button>
+                <Button variant="outline">{t("connect")}</Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>

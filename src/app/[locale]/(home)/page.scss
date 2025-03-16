@@ -35,19 +35,36 @@
 
   .slider-container {
     @apply flex gap-4 relative items-center justify-center md:justify-start;
+
     h3 {
       @apply text-3xl sm:text-4xl lg:text-[4rem] font-bold;
     }
+
     .words {
       @apply h-12 leading-8 overflow-hidden relative w-1/2 mt-5;
-      span {
-        @apply block absolute w-full text-3xl lg:text-[40px] whitespace-nowrap;
-        opacity: 0;
-        animation: slide 8s infinite;
 
-        @for $i from 1 through 4 {
+      span {
+        @apply block absolute w-full text-3xl lg:text-[35px] whitespace-nowrap;
+        opacity: 0;
+        animation: slide 20s infinite;
+        /* 10 so'z uchun 20 soniya */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        max-width: 100%;
+        /* Uzun matnlarni chegarada ushlab turish */
+        font-family: "Roboto", sans-serif;
+        /* Kirill harflarini qo'llab-quvvatlaydigan font */
+        font-size: clamp(20px, 3vw, 35px);
+        /* Moslashuvchan font hajmi */
+        letter-spacing: -0.5px;
+        /* Harflar orasidagi masofani kamaytirish */
+
+        @for $i from 1 through 10 {
           &:nth-child(#{$i}) {
-            animation-delay: #{($i * 2) - 2}s;
+            animation-delay: #{($i - 1) * 2}s;
+            /* Har bir so'zga 2 soniya delay: 0s, 2s, 4s, ..., 18s */
           }
         }
       }
@@ -55,17 +72,20 @@
   }
 
   @keyframes slide {
-    0%, 25% {
+    0%,
+    10% {
       opacity: 0;
       transform: translateY(100%);
     }
 
-    25%, 50% {
+    10%,
+    20% {
       opacity: 1;
       transform: translateY(0);
     }
 
-    50%, 100% {
+    20%,
+    100% {
       opacity: 0;
       transform: translateY(-100%);
     }

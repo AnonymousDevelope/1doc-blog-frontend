@@ -1,0 +1,39 @@
+{
+  "info_panel": {
+    "connect": "Боғланиш",
+    "support": "Техник ёрдамлар",
+    "working_hours": "Иш вақтимиз"
+  },
+  "header": {
+    "navbar": {
+      "home": "Бош сахифа",
+      "faq": "Савол-жавоб",
+      "blog": "Блог",
+      "career": "Кариера"
+    },
+    "languages": {
+      "uz": "Ўзбекча",
+      "en": "Инглизча",
+      "ru": "Русча",
+      "qq": "Қорақалпоқча",
+      "uz-kr": "Ўзбекча (Кирилл)"
+    }
+  },
+  "home": {
+    "slider": {
+      "title":"Лойиҳамиз генофонди қуйидагилардан иборат",
+      "words": {
+        "simplicity": "Соддалик",
+        "innovation": "Янгилашув",
+        "accessibility": "Қулайлик",
+        "reliability": "Ишончлилик",
+        "efficiency": "Самарadorlik",
+        "trust": "Ишонч",
+        "technology": "Технология",
+        "transparency": "Шаффофлик",
+        "empowerment": "Кучайтириш",
+        "transformation": "Ўзгариш"
+      }
+    }
+  }
+}

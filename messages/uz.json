@@ -1,9 +1,39 @@
 {
-    "HomePage": {
-      "title": "Salom Dunyo!",
-      "about": "About page ga chiqish kerak"
+  "info_panel": {
+    "connect": "Bog'lanish",
+    "support": "Texnik yordamlar",
+    "working_hours": "Ish vaqtimiz"
+  },
+  "header": {
+    "navbar": {
+      "home": "Bosh sahifa",
+      "faq": "Savol-javob",
+      "blog": "Blog",
+      "career": "Karyera"
     },
-    "Footer":{
-      "title":"Pastki Qism"
+    "languages": {
+      "uz": "O'zbekcha",
+      "en": "Inglizcha",
+      "ru": "Ruscha",
+      "qq": "Qoraqalpoqcha",
+      "uz-kr": "O'zbekcha (Kirill)"
     }
-} 
+  },
+  "home": {
+    "slider": {
+      "title":"Loyihamiz genofondi quyidagilardan iborat", 
+      "words": {
+        "simplicity": "Soddalik",
+        "innovation": "Yangilashuv",
+        "accessibility": "Qulaylik",
+        "reliability": "Ishonchlilik",
+        "efficiency": "Samaradorlik",
+        "trust": "Ishonch",
+        "technology": "Texnologiya",
+        "transparency": "Shaffoflik",
+        "empowerment": "Kuchaytirish",
+        "transformation": "O‘zgarish"
+      }
+    }
+  }
+}

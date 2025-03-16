@@ -1,9 +1,39 @@
 {
-    "HomePage": {
-      "title": "Hello world!",
-      "about": "Go to the about page"
+  "info_panel": {
+    "connect": "Contact",
+    "support": "Technical support",
+    "working_hours": "Our working hours"
+  },
+  "header": {
+    "navbar": {
+      "home": "Home",
+      "faq": "FAQ",
+      "blog": "Blog",
+      "career": "Career"
     },
-    "Footer":{
-      "title":"Footer"
+    "languages": {
+      "uz": "Uzbek",
+      "en": "English",
+      "ru": "Russian",
+      "qq": "Qaraqalpaq",
+      "uz-kr": "Uzbek (Cyrillic)"
     }
-} 
+  },
+  "home": {
+    "slider": {
+      "title":"The gene pool of our project consists of:",
+      "words": {
+        "simplicity": "Simplicity",
+        "innovation": "Innovation",
+        "accessibility": "Accessibility",
+        "reliability": "Reliability",
+        "efficiency": "Efficiency",
+        "trust": "Trust",
+        "technology": "Technology",
+        "transparency": "Transparency",
+        "empowerment": "Empowerment",
+        "transformation": "Transformation"
+      }
+    }
+  }
+}

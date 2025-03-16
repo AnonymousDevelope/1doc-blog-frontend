@@ -1,7 +1,17 @@
-.info-panel{
-    .info-list{
-        span{
-            @apply lg:text-[14px] dark:text-foreground text-[#4A4A4A];
+.info-panel {
+    .info-list {
+        font-family: "Roboto", sans-serif;
+        span {
+            position: relative;
+            padding: 0.5rem 0;
+            /* Minimal, maksimal va o'zgaruvchan hajm */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Uzun matnni ellips bilan qisqartirish */
+            white-space: nowrap;
+            /* Matnni bir qatorda ushlab turish */
+            display: inline-block;
+            @apply lg:text-[16px] dark:text-foreground text-[#4A4A4A];
         }
     }
 }

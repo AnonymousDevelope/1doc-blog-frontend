@@ -1,0 +1,39 @@
+{
+  "info_panel": {
+    "connect": "Baylanıs",
+    "support": "Tehnikalıq járdemler",
+    "working_hours": "Bizdiń jumıs waqtımız"
+  },
+  "header": {
+    "navbar": {
+      "home": "Bas sahifä",
+      "faq": "Soraw-jawap",
+      "blog": "Blog",
+      "career": "Kärïyerä"
+    },
+    "languages": {
+      "uz": "O‘zbekcha",
+      "en": "İnglizsha",
+      "ru": "Russha",
+      "qq": "Qaraqalpaqsha",
+      "uz-kr": "O‘zbekcha (Kirill)"
+    }
+  },
+  "home": {
+    "slider": {
+      "title":"Joybarımız genofondi tómendegilerden ibarat",
+      "words": {
+        "simplicity": "Жеделдик",
+        "innovation": "Жаңалык",
+        "accessibility": "Қол жетимдilik",
+        "reliability": "Сенімдilik",
+        "efficiency": "Тиімдilik",
+        "trust": "Сенім",
+        "technology": "Технология",
+        "transparency": "Ашықтық",
+        "empowerment": "Күшлендіру",
+        "transformation": "Өзгеріс"
+      }
+    }
+  }
+}

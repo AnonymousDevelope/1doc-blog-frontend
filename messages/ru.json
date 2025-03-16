@@ -1,9 +1,39 @@
 {
-    "HomePage": {
-      "title": "Hello world!",
-      "about": "Go to the about page"
+  "info_panel": {
+    "connect": "Контакт",
+    "support": "Техническая поддержка",
+    "working_hours": "Наше рабочее время"
+  },
+  "header": {
+    "navbar": {
+      "home": "Главная",
+      "faq": "Вопросы и ответы",
+      "blog": "Блог",
+      "career": "Карьера"
     },
-    "Footer":{
-      "title":"Footer"
+    "languages": {
+      "uz": "Узбекский",
+      "en": "Английский",
+      "ru": "Русский",
+      "qq": "Каракалпакский",
+      "uz-kr": "Узбекский (кириллица)"
     }
-} 
+  },
+  "home": {
+    "slider": {
+      "title":"Генофонд нашего проекта состоит из",
+      "words": {
+        "simplicity": "Простота",
+        "innovation": "Инновация",
+        "accessibility": "Доступность",
+        "reliability": "Надежность",
+        "efficiency": "Эффективность",
+        "trust": "Доверие",
+        "technology": "Технология",
+        "transparency": "Прозрачность",
+        "empowerment": "Расширение возможностей",
+        "transformation": "Трансформация"
+      }
+    }
+  }
+}

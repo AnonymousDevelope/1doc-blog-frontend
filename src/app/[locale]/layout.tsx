@@ -49,9 +49,9 @@ export default async function RootLayout({
             <NextIntlClientProvider locale={locale} messages={messages}>
               <ThemeWrapper>
                 <div className="flex flex-col w-full gap-3">
-                  <div className="fixed top-1/2 left-1">
+                    <div className="fixed top-1/2 left-1 z-50 transition-all duration-700 animate-scaleAd">
                     <Ad />
-                  </div>
+                    </div>
                   <InfoPanel />
                   <Navbar />
                   <Direction />

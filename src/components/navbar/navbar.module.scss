@@ -1,5 +1,6 @@
 .navbar {
   @apply flex items-center justify-between w-full text-foreground;
+  font-family: "Roboto", sans-serif;
 
   ul {
     @apply flex gap-6 max-sm:flex-col;
@@ -9,8 +10,11 @@
         @apply transition-all duration-200 ease-in-out no-underline;
         position: relative;
         padding: 0.5rem 0;
-
-        // Desktop holat (border-bottom)
+        font-size: clamp(14px, 2vw, 16px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
         &::after {
           content: '';
           position: absolute;
@@ -22,8 +26,6 @@
           transform: scaleX(0);
           transform-origin: center;
           transition: transform 0.3s ease-in-out;
-
-          // Mobil holat (max-sm) uchun border-left
           @media (max-width: 640px) {
             left: 0;
             top: 0;
@@ -38,6 +40,7 @@
 
         &:hover::after {
           transform: scaleX(1);
+
           @media (max-width: 640px) {
             transform: scaleY(1);
           }
@@ -45,8 +48,10 @@
 
         &.active {
           @apply text-blue-300 font-semibold max-sm:ps-3;
+
           &::after {
             transform: scaleX(1);
+
             @media (max-width: 640px) {
               transform: scaleY(1);
             }
