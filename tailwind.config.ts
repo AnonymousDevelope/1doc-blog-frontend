@@ -20,7 +20,11 @@ export default {
     			roboto: [
     				'Roboto',
     				'sans-serif'
-    			]
+    			],
+				timepos:[
+					"Timepos",
+					"sans-serif"
+				]
     		},
     		boxShadow: {
     			soft: '0 4px 12px rgba(0, 0, 0, 0.1)',
@@ -68,6 +72,9 @@ export default {
     				'5': 'hsl(var(--chart-5))'
     			}
     		},
+			backgroundImage: {
+				'gradient-card': 'var(--gradient-card)'
+			},
     		borderRadius: {
     			lg: 'var(--radius)',
     			md: 'calc(var(--radius) - 2px)',

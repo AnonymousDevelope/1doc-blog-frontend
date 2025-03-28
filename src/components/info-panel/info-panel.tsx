@@ -17,7 +17,7 @@ const InfoPanel = () => {
   }
   return (
     <>
-      <section className="info-panel">
+      <section className="info-panel px-4">
         <div className="flex info-list max-sm:hidden  w-full gap-3 flex-row justify-between dark:text-foreground">
           <div className="flex flex-row items-center gap-4 py-2">
             <HeadphonesIcon className="text-gray-600" />

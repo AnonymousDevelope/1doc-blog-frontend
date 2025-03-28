@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import { DialogContent, DialogClose, DialogHeader, DialogTrigger, Dialog, DialogDescription, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import autoplay from "embla-carousel-autoplay";
 import { useTranslations } from "next-intl";
-import React from 'react';
+import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link as LinkNavigation } from "@/i18n/navigation";
@@ -15,17 +16,21 @@ import Image from "next/image";
 import "./page.scss";
 import { useRouter } from "next/navigation";
 import CardOportunity from "./_components/card-oportunity/card-oportunity";
-interface CardOpportunity {
-  image: string,
-  title: string,
-  description: string
-}
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import MiniCardBlog from "./_components/mini-card-blog/mini-card-blog";
+import CarouselCard from "./_components/carousel-card/carousel-card";
+// interface CardOpportunity {
+//   image: string;
+//   title: string;
+//   description: string;
+// }
+
 const Page = () => {
   const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("Submitted");
-  }
+  };
 
   const tags = [
     "Yuristlar",
@@ -38,33 +43,15 @@ const Page = () => {
     "Suniy Intelekt",
     "Shifrlash",
     "Davron",
-  ]
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ];
   const duplicatedtags = [...tags, ...tags];
   const cards = [
-    { src: "/card-1.jpg", alt: "Business Solution 1", link: "#", title: "Solution 1", description: "Description for Solution 1" },
-    { src: "/card-2.jpg", alt: "Business Solution 2", link: "#", title: "Solution 2", description: "Description for Solution 2" },
-    { src: "/card-3.jpg", alt: "Business Solution 3", link: "#", title: "Solution 3", description: "Description for Solution 3" },
-    { src: "/card-2.jpg", alt: "Business Solution 4", link: "#", title: "Solution 4", description: "Description for Solution 4" },
+    { src: "/card-1.jpg", alt: "Business Solution 1", link: "", title: "Solution 1", description: "Description for Solution 1" },
+    { src: "/card-2.jpg", alt: "Business Solution 2", link: "", title: "Solution 2", description: "Description for Solution 2" },
+    { src: "/card-3.jpg", alt: "Business Solution 3", link: "", title: "Solution 3", description: "Description for Solution 3" },
+    { src: "/card-2.jpg", alt: "Business Solution 4", link: "", title: "Solution 4", description: "Description for Solution 4" },
   ];
-  const card_oportunities: CardOpportunity[] = [
-    {
-      image: "/imkoniyatlar/imzo.png",
-      title: "1Doc - Imzo",
-      description: "1Doc - Biz bilan qanday ikoniyatlarga ega bo'lasiz"
-    },
-    {
-      image: "/imkoniyatlar/lock-doc.png",
-      title: "1Doc - Hujjat Lock",
-      description: "1Doc - Biz bilan qanday ikoniyatlarga ega bo'lasiz"
-    },
-    {
-      image: "/imkoniyatlar/ocr.png",
-      title: "1Doc - OCR",
-      description: "1Doc - Biz bilan qanday ikoniyatlarga ega bo'lasiz"
-    }
-  ]
-  const words:string[] = [
+  const words: string[] = [
     "simplicity",
     "innovation",
     "accessibility",
@@ -77,30 +64,31 @@ const Page = () => {
     "transformation",
   ];
   const t = useTranslations("home");
+  const card_oportunities = t.raw("cards");
   return (
     <div className="container home mx-auto px-4 dark:text-foreground transition-all ease-in-out delay-100">
-      <section className="grid grid-cols-1 sm:grid-cols-[2fr_1.25fr] gap-8 items-center min-h-[80vh]">
+      <section className="grid grid-cols-1 sm:grid-cols-[2.25fr_1fr] gap-8 items-end min-h-[80vh]">
         <div className="space-y-4">
           <div className="slider-container">
-            <h3>1Doc - </h3>
+            <h3>{t("slider.title")}:</h3>
             <div className="words">
-              {
-                words.map((word, index) => (
-                  <span key={index}>{t(`slider.words.${word}`)}</span>
-                ))
-              }
+              {words.map((word, index) => (
+                <span key={index}>{t(`slider.words.${word}`)}</span>
+              ))}
             </div>
           </div>
           <div className="flex xs:flex-row max-md:justify-center gap-3">
             <div className="flex flex-row items-center">
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="!border-foreground min-h-[48px] min-w-[184px] text-[16px]">Bog&apos;lanish</Button>
+                  <Button variant="outline" className="!border-foreground min-h-[48px] min-w-[184px] text-[16px]">
+                    Bog&apos;lanish
+                  </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>Biz bilan bog&apos;lanish</DialogTitle>
-                    <DialogDescription>Biz bilan bog&apos;lanish uchun ma&apos;lumotlaringizni kiriting.</DialogDescription>
+                    <DialogTitle>Biz bilan bog‘lanish</DialogTitle>
+                    <DialogDescription>Biz bilan bog‘lanish uchun ma’lumotlaringizni kiriting.</DialogDescription>
                   </DialogHeader>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
@@ -136,23 +124,28 @@ const Page = () => {
                 </DialogContent>
               </Dialog>
             </div>
-            <Button variant="default" size={"sm"} className="!border-foreground min-h-[48px] min-w-[184px] text-[16px]" onClick={() => router.push('/blog')}>
-              <Link href={"/"}></Link>
+            <Button
+              variant="default"
+              size="sm"
+              className="!border-foreground min-h-[48px] min-w-[184px] text-[16px]"
+              onClick={() => router.push("/blog")}
+            >
               Bloglar
             </Button>
           </div>
         </div>
-        <div className="mx-auto w-[600px] h-auto rounded-lg">
+        <div className="mx-auto  w-auto md:w-[600px] h-auto rounded-lg">
           <Image
-            src="/home/header.png"
+            src="/home/laptop-1doc.jpg"
             alt="Hero Image"
-            width={600} // Kattaroq kenglik
-            height={600} // Kattaroq balandlik
-            quality={100} // Maksimal sifat (default 75)
+            width={600}
+            height={600}
+            quality={100}
             className="rounded-lg object-cover"
           />
         </div>
       </section>
+      {/* Qolgan sektsiyalar o'zgarmaydi */}
       <section className="flex flex-col px-5 py-12 bg-background">
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-5xl text-center font-roboto font-bold mb-10 text-foreground">
@@ -160,32 +153,14 @@ const Page = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {cards.map((card, index) => (
-              <div
-                key={index}
-                className="group flex flex-col items-center h-64 bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={card.src}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    alt={card.alt}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="p-4 w-full flex flex-col">
-                  <h3 className="text-lg font-semibold text-foreground">{card.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{card.description}</p>
-                  <Link href={card.link} target="_blank" className="mt-4">
-                    <Button>Подробнее</Button>
-                  </Link>
-                </div>
-              </div>
+              <React.Fragment key={index}>
+                <MiniCardBlog card={card} />
+              </React.Fragment>
             ))}
           </div>
           <div className="flex flex-row justify-center mt-10">
-            <Button variant={"outline"} className="rounded-full border-2 mx-auto" size={"lg"}>
-              <LinkNavigation href={"/blog"}>Barchasini ko&apos;rish</LinkNavigation>
+            <Button variant="outline" className="rounded-full border-2 mx-auto" size="lg">
+              <LinkNavigation href="/blog">Barchasini ko&apos;rish</LinkNavigation>
             </Button>
           </div>
         </div>
@@ -193,17 +168,45 @@ const Page = () => {
       <section className="w-full h-auto mx-auto py-8 overflow-hidden">
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-5xl text-center font-roboto font-bold mb-10 text-foreground">
-            1Doc - Biz bilan qanday ikoniyatlarga ega bo&apos;lasiz
+            {t("sectionTitle.mainTitle")}
+            <br /> <span className="italic" style={{
+              fontFamily: "Tiempos, Georgia, sans-serif"
+            }}>{t("sectionTitle.italicPart")}</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 px-12 sm:px-5 md:px-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 px-12 sm:px-5 md:px-6">
             {
-              card_oportunities.map((card, index) => (
-                <CardOportunity key={index} image={card.image} title={card.title} description={card.description} />
-              ))
+              Object.entries(card_oportunities).map(([key, value]) => {
+                const typedValue = value as { title: string; description: string };
+                return (
+                  <CardOportunity key={key} title={typedValue.title} description={typedValue.description} />
+                );
+              })
             }
           </div>
         </div>
-      </section >
+      </section>
+      <section className="w-[calc(100%-4rem)] h-auto mt-4 mx-auto">
+        <Carousel
+          plugins={[
+            autoplay({
+              delay: 3000,
+              stopOnInteraction: false,
+            })
+          ]}
+        >
+          <CarouselContent>
+            {[1, 2, 3, 4, 5].map((item) => (
+              <CarouselItem className="md:basis-1/2 lg:basic-1/2 cursor-pointer" key={item}>
+                <CarouselCard>
+                  {item}
+                </CarouselCard>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </section>
       <section className="w-full h-auto md:h-[100px] mx-auto py-8 overflow-hidden">
         <div className="continuous-slider">
           <div className="slider-track">
@@ -219,7 +222,7 @@ const Page = () => {
           </div>
         </div>
       </section>
-    </div >
+    </div>
   );
 };
 

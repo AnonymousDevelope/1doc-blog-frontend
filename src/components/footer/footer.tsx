@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import styles from './footer.module.scss'; // Assuming you're using CSS modules
 import { HeadphonesIcon, MailIcon, MapPinIcon, PhoneCall } from 'lucide-react';
-
+import Link from 'next/link';
+import { Link as CustomLink } from '@/i18n/navigation';
 const Footer = () => {
   return (
     <footer className={`${styles.footer} text-foreground gap-4 w-full flex-col-reverse sm:flex-col bg-slate-50 dark:bg-slate-900/15`}>
@@ -26,34 +27,29 @@ const Footer = () => {
           {/* Second Part: Contact Information */}
           <div className="flex flex-col space-y-3">
             <h3 className="text-lg font-semibold text-foreground">Contact Us</h3>
-            <p className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><MailIcon size={"20px"} /><span>Email: info@example.com</span></p>
-            <p className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><PhoneCall size={"20px"} /><span>Phone: +1 (555) 123-4567</span> </p>
-            <p className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><MapPinIcon size={"20px"} /><span>Address: 123 Tech St, City</span></p>
-            <p className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><HeadphonesIcon size={"20px"} /><span>Support: 123 234 56 67</span></p>
+            <Link href="tel:1232345667" className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><HeadphonesIcon size={"20px"} /><span>Support: 123 234 56 67</span></Link>
+            <Link href="mailto:ceo@1doc.uz" className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><MailIcon size={"20px"} /><span>Email: ceo@1doc.uz</span></Link>
+            <Link href="mailto:info@1doc.uz" className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><MailIcon size={"20px"} /><span>Email: info@1doc.uz</span></Link>
+            <Link href="tel:+15551234567" className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><PhoneCall size={"20px"} /><span>Phone: +1 (555) 123-4567</span></Link>
+            <Link href="https://www.google.com/maps?q=123+Tech+St,+City" target="_blank" className="text-sm text-gray-800 dark:text-gray-300 flex flex-row gap-3"><MapPinIcon size={"20px"} /><span>Address: 123 Tech St, City</span></Link>
+
           </div>
 
           {/* Third Part: Quick Links (Placeholder) */}
           <div className="flex flex-col space-y-2">
             <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
-            <a href="#" className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">Home</a>
-            <a href="#" className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">Services</a>
-            <a href="#" className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">About</a>
-            <a href="#" className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">Blog</a>
+            <CustomLink href={`/home`} className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">Home</CustomLink>
+            <CustomLink href={`/faq`} className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">FAQ</CustomLink>
+            <CustomLink href={`/career`} className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">Career</CustomLink>
+            <CustomLink href={`/blog`} className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">Blog</CustomLink>
+            <CustomLink href={"/team"} className="text-sm text-gray-800 dark:text-gray-300 hover:dark:text-white hover:text-slate-600">Our team</CustomLink>
           </div>
 
           {/* Fourth Part: Social Media (Placeholder) */}
           <div className="flex flex-col space-y-2">
             <h3 className="text-lg font-semibold text-foreground ">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-800 dark:text-gray-300 hover:text-white">
-                <svg className="h-6 w-6" /* Add Facebook SVG */ />
-              </a>
-              <a href="#" className="text-gray-800 dark:text-gray-300 hover:text-white">
-                <svg className="h-6 w-6" /* Add Twitter SVG */ />
-              </a>
-              <a href="#" className="text-gray-800 dark:text-gray-300 hover:text-white">
-                <svg className="h-6 w-6" /* Add Instagram SVG */ />
-              </a>
+              <Image src="/maps.jpeg" height={200} width={300} alt={"maps uzb"} />
             </div>
           </div>
         </div>

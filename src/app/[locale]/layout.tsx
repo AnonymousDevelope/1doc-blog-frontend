@@ -2,13 +2,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Ad, Direction, Footer, InfoPanel, Navbar, ThemeWrapper } from "@/components";
+import { Ad, Direction, Footer, InfoPanel, Loader, Navbar, ThemeWrapper } from "@/components";
 import { NextIntlClientProvider } from "next-intl";
-import {getMessages } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 import { LanguageProvider } from "@/context/language.context";
 import { ThemeProvider } from "@/context/theme.context"; // Theme kontekstini import qilish
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import React, { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,28 +43,32 @@ export default async function RootLayout({
   return (
     <html lang={locale} style={{ ...geistSans.style, ...geistMono.style }}>
       <body
-        className={`sm:overflow-x-hidden dark antialiased !px-4 !py-5 dark:bg-background dark:text-white`}
+        className={`sm:overflow-x-hidden dark antialiased !py-5 dark:bg-background dark:text-white`}
       >
-        <ThemeProvider>
-          <LanguageProvider>
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              <ThemeWrapper>
-                <div className="flex flex-col w-full gap-3">
+        <Suspense fallback={<Loader />}>
+          <ThemeProvider>
+            <LanguageProvider>
+              <NextIntlClientProvider locale={locale} messages={messages}>
+                <ThemeWrapper>
+                  <div className="flex flex-col w-full gap-3">
                     <div className="fixed top-1/2 left-1 z-50 transition-all duration-700 animate-scaleAd">
-                    <Ad />
+                      <Ad />
                     </div>
-                  <InfoPanel />
-                  <Navbar />
-                  <Direction />
-                  {children}
-                  <footer className="flex w-full">
-                    <Footer />
-                  </footer>
-                </div>
-              </ThemeWrapper>
-            </NextIntlClientProvider>
-          </LanguageProvider>
-        </ThemeProvider>
+                    <InfoPanel />
+                    <Navbar />
+                    <Direction />
+                    <div className="px-4">
+                      {children}
+                    </div>
+                    <footer className="flex w-full">
+                      <Footer />
+                    </footer>
+                  </div>
+                </ThemeWrapper>
+              </NextIntlClientProvider>
+            </LanguageProvider>
+          </ThemeProvider>
+        </Suspense>
       </body>
     </html>
   );

@@ -1,20 +1,22 @@
 .navbar {
   @apply flex items-center justify-between w-full text-foreground;
   font-family: "Roboto", sans-serif;
-
+  backdrop-filter: blur(10px);
+  --webkit-backdrop-filter: blur(10px);
   ul {
     @apply flex gap-6 max-sm:flex-col;
-
     li {
       a {
-        @apply transition-all duration-200 ease-in-out no-underline;
+        @apply transition-all duration-200 ease-in-out no-underline text-foreground;
         position: relative;
         padding: 0.5rem 0;
-        font-size: clamp(14px, 2vw, 16px);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         display: inline-block;
+        &:hover{
+          @apply sm:ps-0 ps-3;
+        }
         &::after {
           content: '';
           position: absolute;
