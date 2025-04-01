@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { setCookie } from "typescript-cookie";
+
 import {
   Form,
   FormControl,
@@ -15,12 +18,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email({
     message: "Invalid email address.",
   }),
-  // Password must be at least 6 characters
   password: z.string().min(1, {
     message: "Password must be at least 6 characters.",
   }),
@@ -28,6 +32,10 @@ const formSchema = z.object({
 
 export default function AdminLoginPage() {
   const { toast } = useToast();
+
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,13 +45,10 @@ export default function AdminLoginPage() {
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-
     try {
+      setLoading(true);
+
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -58,19 +63,22 @@ export default function AdminLoginPage() {
         throw new Error(data.message || "Login failed");
       }
 
+      router.push("/dashboard");
+
+      setCookie("token", data.token, { expires: 1 });
+
       toast({
         title: "Success",
         description: "You have successfully logged in",
       });
-
-      // You can redirect or store the token here
-      console.log("Login successful:", data);
     } catch (error) {
       toast({
         title: "Error",
         description: error instanceof Error ? error.message : "Failed to login",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -107,7 +115,7 @@ export default function AdminLoginPage() {
               </FormItem>
             )}
           />
-          <Button className="w-full" type="submit">
+          <Button className="w-full" type="submit" disabled={loading}>
             Submit
           </Button>
         </form>
