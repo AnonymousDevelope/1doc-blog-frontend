@@ -1,5 +1,5 @@
 /* import url roboto font  */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,7 +32,15 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --gradient-card : linear-gradient(#f9fafb,#f3f4f6 );
+    --gradient-card: linear-gradient(#f9fafb, #f3f4f6);
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
     /* #000 to hsl */
@@ -60,7 +68,15 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --gradient-card : linear-gradient(#1f2937,#111827 );
+    --gradient-card: linear-gradient(#1f2937, #111827);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 /* @layer base {
@@ -101,6 +117,130 @@
   }
 }
 
-.featured-card-bg{
-  background: linear-gradient(#111827,#1f2937 );
+.featured-card-bg {
+  background: linear-gradient(#111827, #1f2937);
+}
+
+/* ---break---  */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* General styling for the editor container */
+.tiptap {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #fff;
+  min-height: 200px;
+  overflow-y: auto;
+}
+
+/* Styling for text elements */
+p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+/* Lists */
+ol,
+ul {
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+li {
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+/* Headings */
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: #222;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #007bff;
+  padding-left: 15px;
+  font-style: italic;
+  color: #555;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+/* Code Blocks */
+pre {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: "Courier New", Courier, monospace;
+  background: #f4f4f4;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* Editor Toolbar Buttons */
+.toolbar-button {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toolbar-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-button.active {
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
 }

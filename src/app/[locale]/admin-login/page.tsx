@@ -83,7 +83,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex justify-center w-full items-center p-4">
+    <div className="flex justify-center min-h-screen w-full items-center p-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

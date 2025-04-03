@@ -2,15 +2,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {
-  Ad,
-  Direction,
-  Footer,
-  InfoPanel,
-  Loader,
-  Navbar,
-  ThemeWrapper,
-} from "@/components";
+import { Loader, ThemeWrapper } from "@/components";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { LanguageProvider } from "@/context/language.context";
@@ -59,18 +51,7 @@ export default async function RootLayout({
             <LanguageProvider>
               <NextIntlClientProvider locale={locale} messages={messages}>
                 <ThemeWrapper>
-                  <div className="flex flex-col w-full gap-3">
-                    <div className="fixed top-1/2 left-1 z-50 transition-all duration-700 animate-scaleAd">
-                      <Ad />
-                    </div>
-                    <InfoPanel />
-                    <Navbar />
-                    <Direction />
-                    <div className="px-4">{children}</div>
-                    <footer className="flex w-full">
-                      <Footer />
-                    </footer>
-                  </div>
+                  {children}
 
                   <Toaster />
                 </ThemeWrapper>
