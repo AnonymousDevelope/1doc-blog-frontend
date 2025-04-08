@@ -54,7 +54,7 @@ const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   content: z.string().min(1, "Content is required"),
   categories: z.array(z.string()).min(1, "At least one category is required"),
-  image: z.string().optional(),
+  image: z.string(),
   translations: z.record(translationSchema),
 });
 
@@ -104,16 +104,11 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
     try {
       setIsSubmitting(true);
 
-      const data = {
-        ...values,
-        categories: values.categories.join(","),
-      };
-
       if (blog) {
-        await updateBlog(blog.id, data);
+        await updateBlog(blog.id, values);
         router.push("/dashboard/");
       } else {
-        await createBlog(data);
+        await createBlog(values);
         router.push("/dashboard/");
       }
     } catch (error) {

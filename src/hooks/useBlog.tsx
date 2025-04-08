@@ -46,7 +46,7 @@ export function useBlogApi() {
 
     formData.append("content", blog.content);
 
-    formData.append("categories", blog.categories);
+    formData.append("categories", blog.categories.join(","));
 
     setIsLoading(true);
     setError(null);
@@ -82,6 +82,12 @@ export function useBlogApi() {
       throw new Error("Authentication token not found");
     }
 
+    // format categories
+    const data = {
+      ...blog,
+      categories: blog.categories.join(","),
+    };
+
     setIsLoading(true);
     setError(null);
 
@@ -89,7 +95,7 @@ export function useBlogApi() {
       const res = await fetch(`http://localhost:5000/api/blogs/${id}`, {
         method: "PUT",
         headers: getHeaders(),
-        body: JSON.stringify(blog),
+        body: JSON.stringify(data),
       });
 
       if (!res.ok) {
