@@ -106,10 +106,7 @@ export default function BlogList() {
             </CardHeader>
             <CardContent>
               <div className="line-clamp-2 text-muted-foreground">
-                {blog?.translations?.en?.content
-                  .replace(/<[^>]*>/g, "")
-                  .substring(0, 150)}
-                ...
+                {blog?.content.replace(/<[^>]*>/g, "").substring(0, 150)}
               </div>
             </CardContent>
             <CardFooter>

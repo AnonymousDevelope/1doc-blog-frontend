@@ -17,7 +17,7 @@ export default function Page() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const blogData = await getBlogById(params.id);
+        const blogData = await getBlogById(String(params.id));
         setBlog(blogData);
       } catch (error) {
         console.error("Failed to fetch blog:", error);

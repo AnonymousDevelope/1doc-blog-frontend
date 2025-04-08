@@ -1,38 +1,40 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ImageUploadProps {
-  value: string;
-  onChange: (value: string) => void;
+  value: File | null;
+  onChange: (file: File) => void;
   onRemove: () => void;
 }
 
 export function ImageUpload({ value, onChange, onRemove }: ImageUploadProps) {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  // In a real app, this would upload to a storage service
+  useEffect(() => {
+    if (value) {
+      const url = URL.createObjectURL(value);
+      setPreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setPreviewUrl(null);
+    }
+  }, [value]);
+
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setIsUploading(true);
 
-    // Simulate upload delay
     setTimeout(() => {
-      // In a real app, this would be the URL returned from your storage service
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        onChange(reader.result as string);
-        setIsUploading(false);
-      };
-      reader.readAsDataURL(file);
-    }, 1000);
+      onChange(file);
+      setIsUploading(false);
+    }, 300); // simulate delay (or remove if not needed)
   };
 
   return (
@@ -57,11 +59,11 @@ export function ImageUpload({ value, onChange, onRemove }: ImageUploadProps) {
         />
       </div>
 
-      {value && (
+      {value && previewUrl && (
         <div className="relative rounded-md overflow-hidden border">
           <div className="aspect-video relative">
             <Image
-              src={value || "/placeholder.svg"}
+              src={previewUrl}
               alt="Uploaded image"
               fill
               className="object-cover"
