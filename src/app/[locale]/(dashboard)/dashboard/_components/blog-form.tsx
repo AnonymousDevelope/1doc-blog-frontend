@@ -106,11 +106,11 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
 
       if (blog) {
         await updateBlog(blog.id, values);
-        router.push("/dashboard/");
       } else {
         await createBlog(values);
-        router.push("/dashboard/");
       }
+
+      await router.push("/dashboard/");
     } catch (error) {
       console.error("Error saving blog:", error);
       // Error is already handled by the hook
