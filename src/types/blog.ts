@@ -1,6 +1,7 @@
 export interface Blog {
   id: string;
   title: string;
+  content: string;
   categories: string[];
   image?: string;
   translations: {
@@ -15,6 +16,7 @@ export interface Blog {
 
 export interface BlogInput {
   title: string;
+  content: string;
   categories: string[];
   image?: string;
   translations: {

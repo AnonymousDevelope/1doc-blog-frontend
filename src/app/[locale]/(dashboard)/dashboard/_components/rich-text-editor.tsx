@@ -28,6 +28,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 
+import "./editor-tags.scss";
+
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;

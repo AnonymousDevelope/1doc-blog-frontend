@@ -13,16 +13,34 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Blog } from "@/types/blog";
+import { useBlogApi } from "@/hooks/useBlog";
+
+interface BlogResponse {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  blogs: Blog[];
+}
 
 export default function BlogList() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogData, setBlogData] = useState<BlogResponse>({
+    total: 0,
+    page: 1,
+    limit: 10,
+    totalPages: 1,
+    blogs: [],
+  });
+
   const [loading, setLoading] = useState(true);
+
+  const { getBlogs } = useBlogApi();
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const data = await getBlogs();
-        setBlogs(data);
+        setBlogData(data);
       } catch (error) {
         console.error("Failed to fetch blogs:", error);
       } finally {
@@ -55,7 +73,7 @@ export default function BlogList() {
     );
   }
 
-  if (blogs.length === 0) {
+  if (blogData.blogs?.length === 0) {
     return (
       <div className="text-center py-12">
         <h2 className="text-xl font-medium text-muted-foreground">
@@ -70,8 +88,8 @@ export default function BlogList() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {blogs.map((blog) => (
-        <Link key={blog.id} href={`/blogs/${blog.id}`}>
+      {blogData.blogs?.map((blog) => (
+        <Link key={blog.id} href={`/dashboard/blogs/${blog.id}`}>
           <Card className="overflow-hidden h-full hover:shadow-md transition-shadow">
             {blog.image && (
               <div className="relative h-[200px] w-full">
@@ -88,7 +106,7 @@ export default function BlogList() {
             </CardHeader>
             <CardContent>
               <div className="line-clamp-2 text-muted-foreground">
-                {blog.translations.en?.content
+                {blog?.translations?.en?.content
                   .replace(/<[^>]*>/g, "")
                   .substring(0, 150)}
                 ...

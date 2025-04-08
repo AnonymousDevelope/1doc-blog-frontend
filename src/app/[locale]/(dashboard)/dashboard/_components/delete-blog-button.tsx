@@ -15,17 +15,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useBlogApi } from "@/hooks/useBlog";
 
 export default function DeleteBlogButton({ id }: { id: string }) {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const { deleteBlog } = useBlogApi();
+
   const handleDelete = async () => {
     try {
       setIsDeleting(true);
       await deleteBlog(id);
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     } catch (error) {
       console.error("Error deleting blog:", error);

@@ -24,6 +24,7 @@ import type { Blog } from "@/types/blog";
 import dynamic from "next/dynamic";
 import { MultiSelect } from "./multi-select";
 import { ImageUpload } from "./image-upload";
+import { useBlogApi } from "@/hooks/useBlog";
 
 // Dynamically import the RichTextEditor to avoid SSR issues with Tiptap
 const RichTextEditor = dynamic(
@@ -51,6 +52,7 @@ const translationSchema = z.object({
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
+  content: z.string().min(1, "Content is required"),
   categories: z.array(z.string()).min(1, "At least one category is required"),
   image: z.string().optional(),
   translations: z.record(translationSchema),
@@ -63,50 +65,64 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
   const [activeTab, setActiveTab] = useState("en");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const { updateBlog, createBlog, isAuthenticated } = useBlogApi();
+
   // Initialize form with existing blog data or defaults
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: blog
       ? {
           title: blog.title,
+          content: blog.content,
           categories: blog.categories,
           image: blog.image,
           translations: blog.translations,
         }
       : {
-          title: "",
+          title: "test0",
+          content: "Content",
           categories: [],
           image: "",
           translations: {
-            en: { title: "", content: "" },
-            uz: { title: "", content: "" },
-            ru: { title: "", content: "" },
-            uz_cyrl: { title: "", content: "" },
-            qq: { title: "", content: "" },
+            en: { title: "test1", content: "test1" },
+            uz: { title: "test2", content: "test2" },
+            ru: { title: "test3", content: "test3" },
+            uz_cyrl: { title: "test4", content: "test4" },
+            qq: { title: "test5", content: "test5" },
           },
         },
   });
 
   const onSubmit = async (values: FormValues) => {
+    console.log("Form submitted with values:", values);
+
+    if (!isAuthenticated) {
+      alert("You must be logged in to submit a blog");
+      return;
+    }
+
     try {
       setIsSubmitting(true);
 
-      if (blog) {
-        await updateBlog(blog.id, values);
-        router.push(`/blogs/${blog.id}`);
-      } else {
-        const newBlog = await createBlog(values);
-        router.push(`/blogs/${newBlog.id}`);
-      }
+      const data = {
+        ...values,
+        categories: values.categories.join(","),
+      };
 
-      router.refresh();
+      if (blog) {
+        await updateBlog(blog.id, data);
+        router.push("/dashboard/");
+      } else {
+        await createBlog(data);
+        router.push("/dashboard/");
+      }
     } catch (error) {
       console.error("Error saving blog:", error);
+      // Error is already handled by the hook
     } finally {
       setIsSubmitting(false);
     }
   };
-
   // Get the current translation values for the active tab
   const getTranslationValues = (langCode: string) => {
     return form.watch(`translations.${langCode}`) || { title: "", content: "" };
@@ -150,6 +166,23 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
                   <FormLabel>Main Title</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter the main blog title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Main Content</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter the main blog content"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -294,7 +327,11 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
           <Button type="button" variant="outline" onClick={() => router.back()}>
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            onClick={() => onSubmit(form.getValues())}
+          >
             {isSubmitting ? "Saving..." : blog ? "Update Blog" : "Create Blog"}
           </Button>
         </div>
