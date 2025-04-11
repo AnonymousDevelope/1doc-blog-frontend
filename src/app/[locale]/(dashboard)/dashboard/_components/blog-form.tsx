@@ -20,11 +20,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import type { Blog } from "@/types/blog";
 import dynamic from "next/dynamic";
 import { MultiSelect } from "./multi-select";
 import { ImageUpload } from "./image-upload";
 import { useBlogApi } from "@/hooks/useBlog";
+import { getImagePreview } from "@/lib/utils";
 
 // Dynamically import the RichTextEditor to avoid SSR issues with Tiptap
 const RichTextEditor = dynamic(
@@ -60,7 +60,18 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export default function BlogForm({ blog }: { blog?: Blog }) {
+interface ActionBlog {
+  categories: string[];
+  image: string;
+  content: {
+    [key: string]: {
+      title: string;
+      content: string;
+    };
+  };
+}
+
+export default function BlogForm({ blog }: { blog?: ActionBlog }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("en");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,15 +83,11 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
     resolver: zodResolver(formSchema),
     defaultValues: blog
       ? {
-          title: blog.title,
-          content: blog.content,
           categories: blog.categories,
           image: blog.image,
-          translations: blog.translations,
+          translations: blog.content,
         }
       : {
-          title: "test0",
-          content: "Content",
           categories: [],
           image: "",
           translations: {
@@ -94,8 +101,6 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
   });
 
   const onSubmit = async (values: FormValues) => {
-    console.log("Form submitted with values:", values);
-
     if (!isAuthenticated) {
       alert("You must be logged in to submit a blog");
       return;
@@ -151,39 +156,48 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="md:col-span-2 space-y-8">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Main Title</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter the main blog title" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <div className="flex flex-col gap-8">
+          <div className="md:col-span-1">
+            <h3 className="font-medium mb-2">Preview</h3>
 
-            <FormField
-              control={form.control}
-              name="content"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Main Content</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter the main blog content"
-                      {...field}
+            <Card>
+              <CardContent className="p-4">
+                {form.watch("image") ? (
+                  <div className="relative h-[200px] w-full rounded-md overflow-hidden mb-4">
+                    <Image
+                      src={getImagePreview(form.watch("image"))}
+                      alt="Preview"
+                      fill
+                      className="object-cover"
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                  </div>
+                ) : (
+                  <div className="h-[200px] w-full bg-muted rounded-md flex items-center justify-center mb-4">
+                    <p className="text-muted-foreground">No image selected</p>
+                  </div>
+                )}
+                <h4 className="font-bold text-lg mb-2">
+                  {form.watch("title") || "Blog Title"}
+                </h4>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {form.watch("categories").map((category) => (
+                    <Badge key={category} variant="secondary">
+                      {category}
+                    </Badge>
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: form.watch(`translations.${activeTab}`).content,
+                    }}
+                  />
+                </p>
+              </CardContent>
+            </Card>
+          </div>
 
+          <div className="md:col-span-2 space-y-8">
             <FormField
               control={form.control}
               name="categories"
@@ -223,47 +237,6 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
                 </FormItem>
               )}
             />
-          </div>
-
-          <div className="md:col-span-1">
-            <Card>
-              <CardContent className="p-4">
-                <h3 className="font-medium mb-2">Preview</h3>
-                {form.watch("image") ? (
-                  <div className="relative h-[200px] w-full rounded-md overflow-hidden mb-4">
-                    <Image
-                      src={form.watch("image") || "/placeholder.svg"}
-                      alt="Preview"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div className="h-[200px] w-full bg-muted rounded-md flex items-center justify-center mb-4">
-                    <p className="text-muted-foreground">No image selected</p>
-                  </div>
-                )}
-                <h4 className="font-bold text-lg mb-2">
-                  {form.watch("title") || "Blog Title"}
-                </h4>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {form.watch("categories").map((category) => (
-                    <Badge key={category} variant="secondary">
-                      {category}
-                    </Badge>
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {form
-                    .watch("translations.en.content")
-                    ?.replace(/<[^>]*>/g, "")
-                    .substring(0, 100) || "Blog content preview..."}
-                  {form.watch("translations.en.content")?.length > 100
-                    ? "..."
-                    : ""}
-                </p>
-              </CardContent>
-            </Card>
           </div>
         </div>
 

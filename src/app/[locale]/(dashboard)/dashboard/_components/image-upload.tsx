@@ -6,7 +6,7 @@ import { Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ImageUploadProps {
-  value: File | null;
+  value: File | string | null;
   onChange: (file: File) => void;
   onRemove: () => void;
 }
@@ -16,13 +16,7 @@ export function ImageUpload({ value, onChange, onRemove }: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
-    if (value) {
-      const url = URL.createObjectURL(value);
-      setPreviewUrl(url);
-      return () => URL.revokeObjectURL(url);
-    } else {
-      setPreviewUrl(null);
-    }
+    setPreviewUrl(null);
   }, [value]);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

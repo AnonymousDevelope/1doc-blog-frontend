@@ -10,18 +10,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBlogApi } from "@/hooks/useBlog";
 import DeleteBlogButton from "../../_components/delete-blog-button";
 import { useEffect, useState } from "react";
+import { BlogWithAllLang } from "@/types/blog";
 
 export default function Page() {
-  const [blog, setBlog] = useState(null);
+  const [blog, setBlog] = useState<BlogWithAllLang>({});
   const { getBlogById } = useBlogApi();
 
   const params = useParams();
 
   useEffect(() => {
-    console.log(params);
     const fetchBlog = async () => {
       try {
-        const blogData = await getBlogById(params.id);
+        const blogData = await getBlogById(String(params.id));
         setBlog(blogData);
       } catch (error) {
         console.error("Failed to fetch blog:", error);
@@ -51,14 +51,13 @@ export default function Page() {
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
-        <h1 className="text-3xl font-bold">{blog.title}</h1>
       </div>
 
       {blog.image && (
         <div className="mb-6 relative h-[400px] w-full rounded-lg overflow-hidden">
           <Image
             src={blog.image || "/placeholder.svg"}
-            alt={blog.title}
+            alt={"Hello world!"}
             fill
             className="object-cover"
           />
@@ -67,7 +66,7 @@ export default function Page() {
 
       <div className="flex items-center justify-between mb-6">
         <div className="flex gap-2">
-          {blog.categories.map((category) => (
+          {blog?.categories?.map((category) => (
             <Badge key={category} variant="secondary">
               {category}
             </Badge>
@@ -86,23 +85,29 @@ export default function Page() {
 
       <Tabs defaultValue="en" className="w-full">
         <TabsList className="mb-4">
-          {languages.map((lang) => (
+          {languages?.map((lang) => (
             <TabsTrigger key={lang.code} value={lang.code}>
               {lang.label}
             </TabsTrigger>
           ))}
         </TabsList>
 
-        {languages.map((lang) => (
+        {languages?.map((lang) => (
           <TabsContent key={lang.code} value={lang.code} className="mt-0">
-            {blog.translations?.[lang.code] ? (
-              <div className="prose max-w-none">
-                <h2>{blog.translations?.[lang.code].title}</h2>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: blog.translations[lang.code].content,
-                  }}
-                />
+            {blog.content?.[lang.code] ? (
+              <div className="prose max-w-none flex flex-col gap-4">
+                <h2>
+                  <p className="font-bold mb-2">Title:</p>
+                  {blog.content?.[lang.code].title}
+                </h2>
+                <p>
+                  <p className="font-bold mb-2">Content:</p>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: blog.content[lang.code].content,
+                    }}
+                  />
+                </p>
               </div>
             ) : (
               <div className="text-muted-foreground italic">

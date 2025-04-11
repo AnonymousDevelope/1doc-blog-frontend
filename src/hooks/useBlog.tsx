@@ -82,11 +82,13 @@ export function useBlogApi() {
       throw new Error("Authentication token not found");
     }
 
-    // format categories
-    const data = {
-      ...blog,
-      categories: blog.categories.join(","),
-    };
+    const formData = new FormData();
+
+    formData.append("image", blog.image);
+
+    formData.append("translations", JSON.stringify(blog.translations));
+
+    formData.append("categories", blog.categories.join(","));
 
     setIsLoading(true);
     setError(null);
@@ -94,8 +96,10 @@ export function useBlogApi() {
     try {
       const res = await fetch(`http://localhost:5000/api/blogs/${id}`, {
         method: "PUT",
-        headers: getHeaders(),
-        body: JSON.stringify(data),
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: formData,
       });
 
       if (!res.ok) {
@@ -173,15 +177,18 @@ export function useBlogApi() {
   };
 
   // Get a single blog by ID
-  const getBlogById = async (id: string) => {
+  const getBlogById = async (id: string, locale?: string) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const res = await fetch(`http://localhost:5000/api/blogs/${id}`, {
-        method: "GET",
-        headers: getHeaders(),
-      });
+      const res = await fetch(
+        `http://localhost:5000/api/blogs/${id}${Boolean(locale) ? `?locale=${locale}` : ""}`,
+        {
+          method: "GET",
+          headers: getHeaders(),
+        },
+      );
 
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));

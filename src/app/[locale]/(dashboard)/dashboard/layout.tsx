@@ -16,9 +16,7 @@ export default function RootLayout({
           <AppSidebar />
 
           <SidebarInset>
-            <div className="bg-gray-100 p-4 rounded min-h-[300px]">
-              {children}
-            </div>
+            <div className="pr-4 rounded min-h-[300px]">{children}</div>
           </SidebarInset>
         </div>
       </SidebarProvider>

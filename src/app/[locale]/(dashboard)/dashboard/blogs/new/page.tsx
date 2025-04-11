@@ -9,7 +9,7 @@ export default function NewBlogPage() {
   return (
     <div className="container mx-auto py-8">
       <div className="flex items-center gap-4 mb-6">
-        <Link href="/">
+        <Link href="/dashboard">
           <Button variant="outline" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
