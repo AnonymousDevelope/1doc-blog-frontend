@@ -19,12 +19,12 @@ import CardOportunity from "./_components/card-oportunity/card-oportunity";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import MiniCardBlog from "./_components/mini-card-blog/mini-card-blog";
 import CarouselCard from "./_components/carousel-card/carousel-card";
+
 // interface CardOpportunity {
 //   image: string;
 //   title: string;
 //   description: string;
 // }
-
 const Page = () => {
   const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

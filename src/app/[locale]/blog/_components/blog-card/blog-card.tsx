@@ -1,82 +1,83 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { BsCalendar, BsClock, BsEye } from "react-icons/bs";
-
-interface News {
-  id: number;
-  title: string;
-  image: string;
-  max_read_time: string;
-  publish_date: string;
-  small_description: string;
-  keywords: string[];
-}
+import { Blog } from "@/api/types/blogTypes";
+import { formatDate } from "@/api/utils/formatDate";
 
 interface CardBlogProps {
-  news: News;
+  blog: Blog;
   size: "small" | "large";
+  locale?: string; // Optional locale for date formatting
 }
 
-const CardBlog: React.FC<CardBlogProps> = ({ news, size }) => {
-  const router = useRouter();
-
-  // Kartaga bosilganda ishlaydigan funksiya
-  const handleCardClick = () => {
-    router.push(`/blog/${news.title.replaceAll(" ", "-")}`); // Masalan, /blog/1 sahifasiga o'tadi
-  };
+const CardBlog: React.FC<CardBlogProps> = ({ blog, size, locale = "uz-UZ" }) => {
+  const isLarge = size === "large";
 
   return (
-    <div
-      className={`rounded-md bg-white dark:bg-gray-800 shadow-md overflow-hidden h-auto cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${size === "large" ? "flex flex-col" : "flex flex-col sm:flex-row"
-        }`}
-      onClick={handleCardClick} // Klik hodisasi qo'shildi
+    <Link
+      href={`/blog/${blog.id}`}
+      className={`block rounded-md bg-white dark:bg-gray-800 shadow-md overflow-hidden h-auto transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
+        isLarge ? "flex flex-col" : "flex flex-col sm:flex-row"
+      }`}
     >
-      <div className={`w-full ${size === "large" ? "" : "sm:w-1/3"}`}>
+      <div className={`w-full ${isLarge ? "" : "sm:w-1/3"} relative h-full`}>
         <Image
-          src={news.image}
-          alt={news.title}
-          width={size === "large" ? 400 : 150}
-          height={size === "large" ? 300 : 150}
-          className={`w-full h-auto object-cover aspect-[4/3] ${size === "large" ? "" : "sm:h-full"
-            }`}
+          src={blog.image !== "" ? blog.image : "/blog/no-image.png"}
+          alt={blog.title}
+          width={isLarge ? 800 : 400} // Set width based on size
+          height={isLarge ? 600 : 300} // Set height based on size
+          className={`w-full h-full object-cover aspect-[4/3] ${isLarge ? "" : "sm:h-full"}`}
         />
       </div>
       <div
-        className={`w-full ${size === "large"
+        className={`w-full ${
+          isLarge
             ? "p-4 flex flex-col justify-between flex-grow"
             : "sm:w-2/3 p-4 flex flex-col justify-between"
-          }`}
+        }`}
       >
-        <h3
-          className={`${size === "large" ? "text-xl" : "text-lg"
-            } font-medium text-gray-900 dark:text-gray-100`}
-        >
-          {news.title}
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {news.small_description}
-        </p>
-        <div className="flex flex-wrap gap-1 mb-2">
-          {news.keywords.map((keyword, index) => (
-            <span
-              key={index}
-              className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded"
-            >
-              {keyword}
-            </span>
-          ))}
+        <div>
+          <h3
+            className={`${
+              isLarge ? "text-xl" : "text-lg"
+            } font-medium text-gray-900 dark:text-gray-100 line-clamp-2`}
+          >
+            {blog.title}
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-3">
+            {blog.content.slice(0, 100)}...
+          </p>
+          <div className="flex flex-wrap gap-1 mt-2">
+            {blog.categories.map((category, index) => (
+              <span
+                key={index}
+                className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded"
+              >
+                {category}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
-          <span className="flex flex-row gap-2 items-center"><BsCalendar />{news.publish_date}</span>
+        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-4">
+          <span className="flex flex-row gap-2 items-center">
+            <BsCalendar />
+            {formatDate(blog.publishedAt, locale)}
+          </span>
           <div className="flex flex-row gap-3 items-center">
-            <span className="flex flex-row gap-2 items-center"><BsEye className="scale-150" />{23}</span>
-            <span className="flex flex-row gap-2 items-center"><BsClock className="scale-110" />{news.max_read_time}</span>
+            <span className="flex flex-row gap-2 items-center">
+              <BsEye className="scale-150" />
+              {blog.views}
+            </span>
+            <span className="flex flex-row gap-2 items-center">
+              <BsClock className="scale-110" />
+              {blog.readTime} min
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
