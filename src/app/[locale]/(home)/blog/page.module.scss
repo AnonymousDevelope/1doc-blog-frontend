@@ -1,0 +1,19 @@
+.blogContainer {
+  @apply max-w-6xl mx-auto;
+  h1 {
+    @apply text-4xl font-bold mb-8 text-gray-900 dark:text-foreground;
+  }
+  .recentNews {
+    @apply py-8;
+    h2 {
+      @apply text-2xl font-semibold mb-6 text-gray-900 dark:text-foreground;
+    }
+    .newsGrid {
+      @apply grid grid-cols-1 gap-3 px-2 md:grid-cols-2 md:px-5;
+
+      .smallBlogs {
+        @apply grid grid-cols-1 gap-3;
+      }
+    }
+  }
+}
