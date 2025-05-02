@@ -5,7 +5,8 @@ import Link from "next/link";
 import { BsCalendar, BsClock, BsEye } from "react-icons/bs";
 import { Blog } from "@/api/types/blogTypes";
 import { formatDate } from "@/api/utils/formatDate";
-
+import parse from "html-react-parser";
+import { extractPlainText, truncateText } from "@/utils/extractPlainText";
 interface CardBlogProps {
   blog: Blog;
   size: "small" | "large";
@@ -14,11 +15,13 @@ interface CardBlogProps {
 
 const CardBlog: React.FC<CardBlogProps> = ({ blog, size, locale = "uz-UZ" }) => {
   const isLarge = size === "large";
-
+  const parseText = parse(blog.content);
+  const plainText = extractPlainText(parseText);
+  const truncatedText = truncateText(plainText, 100);
   return (
     <Link
       href={`/blog/${blog.id}`}
-      className={`block rounded-md bg-white dark:bg-gray-800 shadow-md overflow-hidden h-auto transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
+      className={`block rounded-md bg-white dark:bg-gray-800 shadow-md overflow-hidden h-fit transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
         isLarge ? "flex flex-col" : "flex flex-col sm:flex-row"
       }`}
     >
@@ -47,7 +50,7 @@ const CardBlog: React.FC<CardBlogProps> = ({ blog, size, locale = "uz-UZ" }) => 
             {blog.title}
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-3">
-            {blog.content.slice(0, 100)}...
+            {truncatedText  }...
           </p>
           <div className="flex flex-wrap gap-1 mt-2">
             {blog.categories.map((category, index) => (
