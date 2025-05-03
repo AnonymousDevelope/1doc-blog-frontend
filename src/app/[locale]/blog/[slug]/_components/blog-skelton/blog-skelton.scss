@@ -1,0 +1,26 @@
+/* Skeleton Loading Animation */
+@keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Ensure dark mode support */
+  .dark .blogView {
+    .bg-gray-200 {
+      background-color: #4a5568; /* Equivalent to dark:bg-gray-700 */
+    }
+    .bg-gray-300 {
+      background-color: #2d3748; /* Equivalent to dark:bg-gray-600 */
+    }
+  }

@@ -1,8 +1,7 @@
 import React from "react";
-import "./page.scss"; // Module SCSS import
+import "./blog-skelton.scss"; // Module SCSS import
 import { CalendarIcon, Clock, Eye } from "lucide-react";
 const SkeletonBlogPage = () => {
-
   return (
    <section className="blogView animate-pulse">
       <header>
@@ -23,7 +22,6 @@ const SkeletonBlogPage = () => {
           </div>
         </div>
       </header>
-
       <div className="grid grid-cols-1 mt-6 md:grid-cols-[1.3fr,0.7fr] lg:grid-cols-[1.3fr,0.7fr] gap-4">
         {/* Main content skeleton */}
         <div className="blog-content flex gap-3 flex-col">
