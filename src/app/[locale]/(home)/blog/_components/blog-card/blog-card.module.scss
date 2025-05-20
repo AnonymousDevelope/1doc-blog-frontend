@@ -1,0 +1,59 @@
+.cardBlog {
+  @apply rounded-md bg-transparent shadow-md overflow-hidden h-auto cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1;
+  // Umumiy asosiy stillar
+  &.large {
+    @apply flex flex-col; // Large har doim flex-col
+    .imageWrapper {
+      @apply w-full;
+      img {
+        @apply w-full h-auto object-cover aspect-[4/3];
+      }
+    }
+    .content {
+      @apply w-full p-4 flex flex-col justify-between flex-grow;
+      h3 {
+        @apply text-xl font-medium text-gray-900 dark:text-foreground; // Large uchun kattaroq font
+      }
+      p {
+        @apply text-sm text-gray-600 dark:text-foreground;
+      }
+      .keywords {
+        @apply flex flex-wrap gap-1 mb-2;
+        span {
+          @apply text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded;
+        }
+      }
+      .meta {
+        @apply flex justify-between text-xs text-gray-500 dark:text-gray-400;
+      }
+    }
+  }
+
+  &.small {
+    @apply flex flex-col sm:flex-row; // Mobil holatda flex-col, sm dan katta ekranlarda flex-row
+    .imageWrapper {
+      @apply w-full sm:w-1/3;
+      img {
+        @apply w-full h-auto object-cover aspect-[4/3] sm:h-full;
+      }
+    }
+    .content {
+      @apply w-full sm:w-2/3 p-4 flex flex-col justify-between;
+      h3 {
+        @apply text-lg font-medium text-gray-900 dark:text-foreground; // Small uchun odatiy font
+      }
+      p {
+        @apply text-sm text-gray-600 dark:text-gray-400;
+      }
+      .keywords {
+        @apply flex flex-wrap gap-1 mb-2;
+        span {
+          @apply text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded;
+        }
+      }
+      .meta {
+        @apply flex justify-between text-xs text-gray-500 dark:text-gray-400;
+      }
+    }
+  }
+}

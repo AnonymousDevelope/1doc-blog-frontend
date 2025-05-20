@@ -1,0 +1,15 @@
+.blogView {
+    header {
+        .news_item {
+            @apply mt-5;
+            div[data-item] {
+                // Umumiy border (masalan, agar mavjud bo'lsa)
+                @apply p-2 py-0;
+                border-right: 2px solid #ccc; // Misol uchun
+                &:last-child {
+                    border-right: none; // Oxirgi elementda border yo'q
+                }
+            }
+        }
+    }
+}

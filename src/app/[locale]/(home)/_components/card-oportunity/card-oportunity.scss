@@ -1,0 +1,106 @@
+.card-oportunity {
+  @apply flex flex-col items-center gap-4 rounded-lg bg-card shadow-md transition-all duration-100 py-6 px-4;
+  min-height: 300px;
+  height: max-content;
+  max-width: 350px;
+  cursor: pointer;
+  &:hover {
+    @apply bg-gray-100 dark:bg-gray-900 transform scale-105;
+  }
+  .header {
+    @apply flex flex-row w-full items-center gap-3;
+    .icon {
+      @apply w-[40px] h-[40px] rounded-full bg-slate-600;
+    }
+    span {
+      @apply text-sm md:text-base font-semibold text-foreground;
+      max-width: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .image-container {
+    @apply w-full h-[150px] flex items-center justify-center;
+    overflow: hidden;
+
+    img {
+      @apply w-full h-full object-cover rounded-lg;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        @apply transform scale-125;
+      }
+    }
+  }
+
+  .card-content {
+    @apply flex flex-col justify-between w-full;
+
+    h3 {
+      @apply text-center text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 italic;
+      max-height: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .description-wrapper {
+      @apply relative;
+
+      p {
+        @apply text-xs md:text-sm text-gray-600 dark:text-gray-300 leading-relaxed mt-2;
+        max-height: 100px; /* Har bir kartochka uchun dastlabki balandlik */
+        overflow: hidden;
+        white-space: pre-wrap;
+        transition: max-height 0.3s ease-in-out;
+      }
+
+      &.expanded {
+        p {
+          max-height: 500px; /* To'liq ochilganda katta balandlik (yoki kerakli qiymat) */
+        }
+      }
+    }
+
+    .toggle-link {
+      @apply text-blue-500 dark:text-blue-400 text-xs md:text-sm mt-2 cursor-pointer hover:underline;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .card-oportunity {
+    @apply max-w-full px-2 py-4;
+
+    .header {
+      span {
+        @apply text-sm;
+      }
+    }
+
+    .image-container {
+      @apply h-[120px];
+    }
+
+    .card-content {
+      h3 {
+        @apply text-base;
+      }
+      .description-wrapper {
+        p {
+          @apply text-xs;
+          max-height: 80px;
+        }
+
+        &.expanded {
+          p {
+            max-height: 400px; /* Kichik ekranlar uchun moslashtirilgan balandlik */
+          }
+        }
+      }
+    }
+  }
+}

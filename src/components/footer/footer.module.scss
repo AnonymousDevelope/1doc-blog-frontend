@@ -1,0 +1,19 @@
+.footer {
+    color: #d1d5db; // Light gray for dark:text-foreground
+    .container {
+      max-width: 1200px;
+    }
+    a {
+      transition: color 0.2s ease-in-out;
+    }
+  
+    @media (max-width: 768px) {
+      height: auto; // Allows height to adjust on mobile
+      padding: 2rem 0;
+  
+      .grid {
+        grid-template-columns: 1fr; // Stack columns on mobile
+        gap: 2rem;
+      }
+    }
+  }

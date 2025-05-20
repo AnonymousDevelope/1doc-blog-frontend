@@ -1,0 +1,26 @@
+.direction {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .pathItem {
+    display: flex;
+    align-items: center;
+  }
+  
+  .link {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    &:hover {
+      color: #1f2937;
+    }
+  }
+  
+  .separator {
+    color: #9ca3af;
+    transform: scale(1.5);
+  }
