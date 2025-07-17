@@ -1,30 +1,28 @@
-"use server"
-// app/[locale]/(dashboard)/admin-login/page.tsx
+"use server";
+
 import { cookies } from "next/headers";
 import { z } from "zod";
-import LoginForm from "./_components/LoginForm";
 import { login } from "@/api/services/authService";
+import LoginForm from "./_components/LoginForm";
+
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
   password: z.string().min(3, { message: "Password must be at least 3 characters." }),
 });
-interface PageProps {
-  params: {
-    locale: string;
-  };
-}
-// ✅ Server Action outside of component
+
 export async function handleLogin(formData: FormData) {
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
   };
+  
   try {
     const validatedData = formSchema.parse(data);
     const response = await login(validatedData.email, validatedData.password);
-    cookieStore.set("token", response.token, {
-      expires: new Date(Date.now() + 60 * 60 * 1000), // 1 hour
+    
+    (await cookieStore).set("token", response.token, {
+      expires: new Date(Date.now() + 60 * 60 * 1000),
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
@@ -48,8 +46,8 @@ export async function handleLogin(formData: FormData) {
     };
   }
 }
-export default async function AdminLoginPage({ params }: PageProps) {
-  const locale = params.locale;
+export default async function AdminLoginPage({ params }: { params: Promise<{ locale: string }>  }) {
+  const { locale } = await params;
   console.log(locale);
   return (
     <div className="flex min-h-screen w-full items-center justify-center p-4">

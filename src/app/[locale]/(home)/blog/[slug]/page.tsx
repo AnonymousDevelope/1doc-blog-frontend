@@ -8,7 +8,7 @@ import { getBlogById, getBlogs } from "@/api/services/blogService";
 import { cookies } from "next/headers";
 import parse from "html-react-parser";
 import { formatDate } from "@/api/utils/formatDate";
-import {BlogSkeleton} from "./_components";
+import {SkeletonBlogPage} from "./_components";
 import { NextIntlClientProvider } from "next-intl";
 
 interface PageProps {
@@ -120,7 +120,7 @@ const Page = async ({ params }: PageProps) => {
   const { slug } = await params;
   const locale = (await cookies()).get("NEXT_LOCALE")?.value || "uz";
   return (
-    <Suspense fallback={<BlogSkeleton />}>
+    <Suspense fallback={<SkeletonBlogPage size="small" />}>
       <BlogContent slug={slug} locale={locale} />
     </Suspense>
   );
