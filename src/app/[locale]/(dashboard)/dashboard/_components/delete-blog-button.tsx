@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,26 +18,22 @@ import {
 import { deleteBlog } from "@/api/services/blogService";
 
 interface DeleteBlogButtonProps {
-  id: Promise<{ id: React.ReactNode }>;
+  id: string;
 }
 
 export default function DeleteBlogButton({ id }: DeleteBlogButtonProps) {
-  const [blogId, setBlogId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
-  useEffect(() => {
-    id.then(res => setBlogId(res.id));
-  }, [id]);
   const handleDelete = async () => {
-    if (!blogId) return;
     try {
       setIsDeleting(true);
-      await deleteBlog(blogId);
+      await deleteBlog(id);
       router.push("/dashboard");
       router.refresh();
     } catch (error) {
       console.error("Error deleting blog:", error);
+      // You might want to add toast notification here
     } finally {
       setIsDeleting(false);
       setOpen(false);
@@ -47,7 +43,7 @@ export default function DeleteBlogButton({ id }: DeleteBlogButtonProps) {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" disabled={!blogId}>
+        <Button variant="destructive">
           <Trash2 className="mr-2 h-4 w-4" />
           Delete
         </Button>
@@ -64,7 +60,7 @@ export default function DeleteBlogButton({ id }: DeleteBlogButtonProps) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={handleDelete}
-            disabled={isDeleting || !blogId}
+            disabled={isDeleting}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
             {isDeleting ? "Deleting..." : "Delete"}

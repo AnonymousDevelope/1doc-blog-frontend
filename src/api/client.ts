@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 // Base URL for the API
-const API_URL = "http://localhost:5000/api/";
+const API_URL = "https://onedoc-blog.onrender.com/api";
 
 // Create the Axios instance
 export const apiClient: AxiosInstance = axios.create({

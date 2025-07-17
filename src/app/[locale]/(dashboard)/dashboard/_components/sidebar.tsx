@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 
 import {
@@ -12,7 +13,9 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import Link from "next/link";
+
+import { usePathname } from "next/navigation";
+import { Link } from "@/i18n/navigation";
 
 // This is sample data.
 const data = {
@@ -23,7 +26,7 @@ const data = {
       items: [
         {
           title: "Blogs",
-          url: "/blogs",
+          url: "/dashboard",
         },
       ],
     },
@@ -31,6 +34,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+    console.log(pathname);
   return (
     <Sidebar {...props}>
       <SidebarHeader></SidebarHeader>
@@ -42,7 +47,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
+                    <SidebarMenuButton asChild isActive={item.url === pathname}>
                       <Link href={item.url} className="flex items-center">
                         <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {item.title}

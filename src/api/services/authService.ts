@@ -42,7 +42,7 @@ export const verifyToken = async (
 ): Promise<boolean> => {
   try {
     console.log(token);
-    const response = await axios.get("http://localhost:5000/api/auth/verify",{
+    const response = await axios.get("https://onedoc-blog.onrender.com/api/auth/verify",{
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
