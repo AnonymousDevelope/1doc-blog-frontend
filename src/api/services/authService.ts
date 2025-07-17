@@ -1,10 +1,8 @@
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
 import { apiClient } from "../client";
 import { LoginResponse } from "../types/authTypes";
 
-interface VerifyTokenResponse {
-  valid: boolean;
-}
+
 
 export const login = async (
   email: string,
@@ -18,24 +16,14 @@ export const login = async (
     });
     // Cookie avtomatik saqlanadi, tokenni alohida saqlash shart emas
     return response.data;
-  } catch (error: any) {
-    if (error.response) {
-      const status = error.response.status;
-      const message = error.response.data?.message || "Login failed";
-      if (status === 401) {
-        throw new Error("Invalid email or password");
-      } else if (status === 429) {
-        throw new Error("Too many login attempts. Please try again later.");
-      }
-      throw new Error(`Login failed: ${message} (Status: ${status})`);
-    } else if (error.request) {
-      throw new Error("Network error: Unable to reach the server.");
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Login failed: ${error.message}`);
     }
-    throw new Error(
-      error instanceof Error ? error.message : "Unexpected login error"
-    );
+    throw new Error("Unexpected login error");  
   }
-};
+}
+
 export const verifyToken = async (
   token:string,
   // customApiClient: AxiosInstance = createApiClient()
@@ -54,11 +42,14 @@ export const verifyToken = async (
       throw new Error("Invalid verify response: 'valid' field missing or not a boolean");
     }
     return response.data.valid;
-  } catch (error: any) {
-    console.log("Invalid token:",error);
-    return false;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(`Invalid token: ${error.message}`);
+    }
+    throw new Error("Unexpected token verification error");
   }
 };
+
 // export const logOut = async (
 //   customApiClient: AxiosInstance = createApiClient()
 // ) => {

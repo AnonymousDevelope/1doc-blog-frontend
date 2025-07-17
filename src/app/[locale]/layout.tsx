@@ -1,4 +1,3 @@
-// src/app/[locale]/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -36,12 +35,12 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const locale = params.locale;
-
+  const { locale } = await params;
   if (!routing.locales.includes(locale as "uz" | "ru" | "en")) {
     notFound();
   }
   const messages = await getMessages({ locale });
+  
   return (
     <html lang={locale} className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="sm:overflow-x-hidden dark antialiased py-5 dark:bg-background dark:text-white">

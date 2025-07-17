@@ -77,13 +77,12 @@ export default async function Page({ params }: PageProps) {
             </TabsTrigger>
           ))}
         </TabsList>
-        {
-          languages.map((lang: { code: string; label: string }) => {
-            const translation = blog.content[lang.code] as { title: string; content: string };
-            return (
-              <TabsContent key={lang.code} value={lang.code} className="mt-0">
-                {translation ? (
-                  <div className="prose max-w-none flex flex-col gap-4">
+        {languages.map((lang: { code: string; label: string }) => {
+          const translation = (blog.content as unknown as Record<string, { title: string; content: string }>)[lang.code];
+          return (
+            <TabsContent key={lang.code} value={lang.code} className="mt-0">
+              {translation ? (
+                <div className="prose max-w-none flex flex-col gap-4">
                     <h2>
                       <p className="font-bold mb-2">Title:</p>
                       {translation?.title}
