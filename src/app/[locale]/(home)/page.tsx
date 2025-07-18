@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import "./page.scss";
 import { Button } from "@/components/ui/button";
@@ -37,23 +36,17 @@ import MiniCardBlog from "./_components/mini-card-blog/mini-card-blog";
 import CarouselCard from "./_components/carousel-card/carousel-card";
 import { getBlogs } from "@/api/services/blogService";
 import { Blog } from "@/api/types/blogTypes";
-
-// Define the type for card opportunities
 interface CardOpportunity {
   title: string;
   description: string;
 }
-
 const Page = () => {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("home");
-
   const [cards, setCards] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // Fetch recent blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -68,15 +61,12 @@ const Page = () => {
         setLoading(false);
       }
     };
-
     fetchBlogs();
-  }, [locale]); // Refetch when locale changes
-
+  }, [locale]);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("Submitted");
   };
-
   const tags = [
     "Yuristlar",
     "Hujjatlar",
@@ -90,7 +80,6 @@ const Page = () => {
     "Davron",
   ];
   const duplicatedTags = [...tags, ...tags];
-
   const words: string[] = [
     "simplicity",
     "innovation",
@@ -103,13 +92,11 @@ const Page = () => {
     "empowerment",
     "transformation",
   ];
-
   const card_oportunities: Record<string, CardOpportunity> = t.raw("cards");
-
   return (
     <div className="container home mx-auto px-4 dark:text-foreground transition-all ease-in-out delay-100">
-      {/* Hero Section */}
-      <section className="grid grid-cols-1 sm:grid-cols-[2.25fr_1fr] gap-8 items-end min-h-[80vh]">
+      {}
+      <section className="grid grid-cols-1 sm:grid-cols-[2.25fr_1fr] gap-8 items-end min-h-[50vh]">
         <div className="space-y-4">
           <div className="slider-container">
             <h3>{t("slider.title")}:</h3>
@@ -202,12 +189,11 @@ const Page = () => {
             height={600}
             quality={100}
             className="rounded-lg object-cover"
-            onError={(e) => (e.currentTarget.src = "/home/placeholder.jpg")} // Fallback image
+            onError={(e) => (e.currentTarget.src = "/home/placeholder.jpg")}
           />
         </div>
       </section>
-
-      {/* Blog Section */}
+      {}
       <section className="flex flex-col px-5 py-12 bg-background">
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-5xl text-center font-roboto font-bold mb-10 text-foreground">
@@ -250,8 +236,7 @@ const Page = () => {
           </div>
         </div>
       </section>
-
-      {/* Opportunities Section */}
+      {}
       <section className="w-full h-auto mx-auto py-8 overflow-hidden">
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-5xl text-center font-roboto font-bold mb-10 text-foreground">
@@ -275,8 +260,7 @@ const Page = () => {
           </div>
         </div>
       </section>
-
-      {/* Carousel Section */}
+      {}
       <section className="w-[calc(100%-4rem)] h-auto mt-4 mx-auto">
         <Carousel
           plugins={[
@@ -300,8 +284,7 @@ const Page = () => {
           <CarouselNext />
         </Carousel>
       </section>
-
-      {/* Tags Slider Section */}
+      {}
       <section className="w-full h-auto md:h-[100px] mx-auto py-8 overflow-hidden">
         <div className="continuous-slider">
           <div className="slider-track">
@@ -320,5 +303,4 @@ const Page = () => {
     </div>
   );
 };
-
 export default Page;

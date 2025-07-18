@@ -1,42 +1,63 @@
-import React from "react";
+import React, { ReactNode, ReactElement } from "react";
 
-// Extracts plain text from parsed React content (e.g., from html-react-parser)
-export const extractPlainText = (parsedContent: React.ReactNode): string => {
-  // Handle null or undefined
-  if (parsedContent == null) {
+/**
+ * Recursively extracts plain text from React nodes.
+ * @param parsedContent - A ReactNode (string, number, boolean, element, or array) to extract text from.
+ * @returns The extracted plain text string.
+ */
+export const extractPlainText = (parsedContent: ReactNode): string => {
+  if (parsedContent == null || parsedContent === false || parsedContent === true) {
     return "";
   }
 
-  // Handle strings directly
-  if (typeof parsedContent === "string") {
-    return parsedContent.trim();
-  }
-
-  // Handle numbers and booleans by converting to string
-  if (typeof parsedContent === "number" || typeof parsedContent === "boolean") {
+  if (typeof parsedContent === "string" || typeof parsedContent === "number") {
     return String(parsedContent).trim();
   }
 
-  // Handle arrays (e.g., multiple children)
   if (Array.isArray(parsedContent)) {
     return parsedContent
       .map((item) => extractPlainText(item))
-      .filter((text) => text !== "") // Remove empty strings
+      .filter(Boolean)
       .join(" ")
       .trim();
   }
 
-  // Handle React elements
   if (React.isValidElement(parsedContent)) {
-    return extractPlainText(parsedContent?.props?.children);
+    const element = parsedContent as ReactElement<{ children?: ReactNode }>; // ✅ Fix
+    return extractPlainText(element.props.children);
   }
 
-  // Fallback for other types
   return "";
 };
 
-// Truncates text to a specified length, adding "..." if needed
+/**
+ * Truncates a string and adds ellipsis if it exceeds the given max length.
+ * @param text - Input text string to truncate.
+ * @param maxLength - Maximum length before truncation.
+ * @returns Truncated string with ellipsis if applicable.
+ */
 export const truncateText = (text: string, maxLength: number): string => {
-  if (text.length <= maxLength) return text;
-  return text.substring(0, maxLength) + "...";
+  if (typeof text !== "string") {
+    console.warn("truncateText: Expected string input, received", typeof text);
+    return "";
+  }
+
+  if (!Number.isFinite(maxLength) || maxLength < 0) {
+    console.warn("truncateText: maxLength must be a non-negative number");
+    return text;
+  }
+
+  if (text.length === 0 || text.length <= maxLength) {
+    return text;
+  }
+
+  // Try not to cut in the middle of a word
+  if (maxLength > 3) {
+    const lastSpace = text.lastIndexOf(" ", maxLength);
+    if (lastSpace !== -1 && lastSpace > maxLength - 10) {
+      return text.slice(0, lastSpace) + "...";
+    }
+  }
+
+  return text.slice(0, maxLength) + "...";
 };

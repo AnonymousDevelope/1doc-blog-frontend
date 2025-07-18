@@ -5,22 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import parse from "html-react-parser";
 import Image from "next/image";
-// Import the updated extractPlainText function
 import {extractPlainText,truncateText} from "@/utils/extractPlainText"; 
 interface MiniCardBlogProps {
   card: Blog;
 }
-
 const MiniCardBlog: React.FC<MiniCardBlogProps> = ({ card }) => {
-  // Parse the HTML content
   const parsedContent = parse(card.content);
-
-  // Extract plain text from the parsed content
   const plainTextContent = extractPlainText(parsedContent);
-
-  // Truncate the plain text to 100 characters
   const truncatedContent = truncateText(plainTextContent, 100);
-
   return (
     <div className="group flex flex-col items-center sm:h-80 h-96 bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
       <div className="relative w-full h-1/2">
@@ -50,5 +42,4 @@ const MiniCardBlog: React.FC<MiniCardBlogProps> = ({ card }) => {
     </div>
   );
 };
-
 export default MiniCardBlog;

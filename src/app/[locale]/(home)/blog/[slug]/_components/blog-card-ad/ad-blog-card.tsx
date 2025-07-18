@@ -12,11 +12,8 @@ interface CardBlogProps {
 }
 const AdCardBlog: React.FC<CardBlogProps> = async ({ news,locale }) => {
  const parsedContent = parse(news.content);
-   // Extract plain text from the parsed content
    const plainTextContent = extractPlainText(parsedContent);
-   // Truncate the plain text to 100 characters
    const truncatedContent = truncateText(plainTextContent, 100);
-  // Kartaga bosilganda ishlaydigan kod
   return (
     <Link
       className={`rounded-md bg-white dark:bg-gray-800 shadow-md overflow-hidden h-auto cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 flex flex-row`}
@@ -37,7 +34,6 @@ const AdCardBlog: React.FC<CardBlogProps> = async ({ news,locale }) => {
       >
         <span className="text-sm text-gray-600 dark:text-gray-400">
           {
-            // split news content add ...
             truncatedContent
           }
         </span>
@@ -52,5 +48,4 @@ const AdCardBlog: React.FC<CardBlogProps> = async ({ news,locale }) => {
     </Link>
   );
 };
-
 export default AdCardBlog;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiClient } from "../client";
+import { API_URL, apiClient } from "../client";
 import { LoginResponse } from "../types/authTypes";
 
 
@@ -30,7 +30,7 @@ export const verifyToken = async (
 ): Promise<boolean> => {
   try {
     console.log(token);
-    const response = await axios.get("https://onedoc-blog.onrender.com/api/auth/verify",{
+    const response = await axios.get(`${API_URL}/auth/verify`,{
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
