@@ -28,7 +28,6 @@
       }
     }
   }
-
   &.small {
     @apply flex flex-col sm:flex-row; // Mobil holatda flex-col, sm dan katta ekranlarda flex-row
     .imageWrapper {

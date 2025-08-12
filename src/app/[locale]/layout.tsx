@@ -43,7 +43,7 @@ export default async function RootLayout({
   
   return (
     <html lang={locale} className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="sm:overflow-x-hidden dark antialiased py-5 dark:bg-background dark:text-white">
+      <body className="sm:overflow-x-hidden dark antialiased py-5 dark:bg-[#0E0E10] dark:text-white">
         <Suspense fallback={<Loader />}>
           <ThemeProvider>
             <LanguageProvider>

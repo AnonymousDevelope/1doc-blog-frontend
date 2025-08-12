@@ -68,11 +68,11 @@ const Navbar = () => {
       <nav
         className={`${styles.navbar} sticky top-0 border-b-2 border-background dark:border-gray-800 shadow-md dark:shadow-gray-800/50 z-50`}
       >
-        <div className="flex w-full items-center justify-between px-4 py-2">
+        <div className="flex w-full items-center justify-between px-4 py-2 mx-auto ">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-3">
-              <span className="font-bold text-2xl md:text-3xl">1Doc</span>
               <Image src="/1doc-logo.png" width={40} height={40} alt="1Doc Logo"  />
+              <span className="font-bold text-2xl md:text-3xl ">Doc</span>
             </Link>
           </div>
           <ul

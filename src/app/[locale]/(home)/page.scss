@@ -1,49 +1,79 @@
 .home {
-  $gradient: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
-  $dark-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+  $gradient: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  $dark-gradient: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
 
-  // $shadow-geadient: 
+  // $shadow-geadient:
   .continuous-slider {
     @apply w-full overflow-hidden flex items-center relative;
     /* Minimal balandlik qo'shish (Minimal height addition) */
     &::before,
     &::after {
       @apply absolute top-0 lg:w-[200px] w-[65px] h-full z-10 pointer-events-none;
-      content: '';
+      content: "";
       /* Adjusted blur for a subtler, more spread-out effect */
       -webkit-backdrop-filter: blur(4px); /* Slightly increased blur radius */
-         -moz-backdrop-filter: blur(4px); /* Vendor prefixes for compatibility */
-              backdrop-filter: blur(4px);
+      -moz-backdrop-filter: blur(4px); /* Vendor prefixes for compatibility */
+      backdrop-filter: blur(4px);
       /* Add slight transparency */
-      background: rgba(255, 255, 255, 0.1); /* Light transparent base for light mode */
+      background: rgba(
+        255,
+        255,
+        255,
+        0.1
+      ); /* Light transparent base for light mode */
       /* Ensure stacking context */
       transform: translateZ(0);
       /* Optional: Prevent clipping with padding */
       padding: 0 5px;
     }
-  
+
     &::before {
       @apply left-0 rounded-r-md;
       background: $gradient; /* Ensure $gradient is defined */
     }
-  
+
     &::after {
       @apply right-0 rounded-l-md;
-      background: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+      background: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0) 100%
+      );
     }
-  
+
     .dark & {
       &::before {
         background: $dark-gradient; /* Ensure $dark-gradient is defined */
       }
-  
+
       &::after {
-        background: linear-gradient(to left, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(
+          to left,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
         /* Adjust transparency for dark mode */
         -webkit-backdrop-filter: blur(8px);
-           -moz-backdrop-filter: blur(8px);
-                backdrop-filter: blur(8px);
-        background: rgba(0, 0, 0, 0.1); /* Dark transparent base for dark mode */
+        -moz-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        background: rgba(
+          0,
+          0,
+          0,
+          0.1
+        ); /* Dark transparent base for dark mode */
       }
     }
   }
@@ -58,13 +88,18 @@
       max-width: 80%;
       /* Matnni chegaralash */
     }
-
     .words {
-      @apply h-16 overflow-hidden relative w-full max-w-md mt-6 bg-card rounded-md;
-      padding: 0.5rem;
-
+      @apply h-20 overflow-hidden relative w-full max-w-2xl;
+  
       span {
-        @apply block absolute w-full lowercase text-3xl sm:text-3xl lg:text-3xl font-bold whitespace-nowrap text-foreground;
+        @apply absolute text-3xl lg:text-4xl font-bold;
+        background: linear-gradient(to right, #60a5fa, #818cf8);
+        background-size: 200% auto;
+        background-position: center;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+  
         opacity: 0;
         animation: slide 20s infinite;
         overflow: hidden;
@@ -73,37 +108,35 @@
         display: inline-block;
         max-width: 100%;
         letter-spacing: -0.5px;
-        font-family: "Timepos", san-serif;
-
-        @for $i from 1 through 10 {
-          &:nth-child(#{$i}) {
-            animation-delay: #{($i - 1) * 2}s;
-          }
-        }
+        font-family: inherit;
+  
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateX(150%) scale(0.6);
       }
     }
   }
-
+  
   @keyframes slide {
-
     0%,
-    10% {
+    5% {
       opacity: 0;
-      transform: translateY(100%) scale(0.6);
+      transform: translate(-50%, -50%) translateX(150%) scale(0.6);
     }
-
+  
     10%,
-    20% {
+    15% {
       opacity: 1;
-      transform: translateY(12%) scale(1);
+      transform: translate(-50%, -50%) translateX(0%) scale(1);
     }
-
+  
     20%,
     100% {
       opacity: 0;
-      transform: translateY(-100%) scale(0.6);
+      transform: translate(-50%, -50%) translateX(-150%) scale(0.3);
     }
   }
+  
 
   .slider-track {
     @apply flex gap-4;

@@ -20,6 +20,51 @@
     }
   },
   "home": {
+    "hero": {
+      "badge": "🚀 Innovatsion IT yechimlari",
+      "title": "Biznesingizni",
+      "titleHighlight": "raqamlashtiring",
+      "description": "Zamonaviy texnologiyalar yordamida biznesingizni keyingi bosqichga olib chiqing. Samaradorlik, xavfsizlik va innovatsiyani birlashtirgan yechimlar.",
+      "ctaPrimary": "Bepul maslahat olish",
+      "ctaSecondary": "Loyihalarni ko'rish",
+      "stats": {
+        "projects": {
+          "number": "500+",
+          "label": "Muvaffaqiyatli loyiha"
+        },
+        "satisfaction": {
+          "number": "98%",
+          "label": "Mijozlar mamnuniyati"
+        },
+        "support": {
+          "number": "24/7",
+          "label": "Texnik yordam"
+        }
+      }
+    },
+    "features": {
+      "badge": "Nima uchun bizni tanlashadi",
+      "title": "Mijozlarimiz bizni qadrlaydigan sabablar",
+      "description": "Biz har bir loyihaga individual yondashuv va yuqori sifatli xizmat ko'rsatishni kafolatlaymiz",
+      "items": [
+        {
+          "title": "Tezkor ishlov berish",
+          "description": "Loyihalarni eng qisqa muddatda va yuqori sifat bilan amalga oshiramiz"
+        },
+        {
+          "title": "Xavfsizlik kafolati",
+          "description": "Ma'lumotlaringiz xavfsizligi va maxfiyligini ta'minlaymiz"
+        },
+        {
+          "title": "Professional jamoa",
+          "description": "Tajribali mutaxassislar jamoasi sizning loyihangizda ishlaydi"
+        },
+        {
+          "title": "Samaradorlik o'sishi",
+          "description": "Biznes jarayonlaringizni optimallashtirish va samaradorlikni oshirish"
+        }
+      ]
+    },
     "slider": {
       "title": "Loyihamiz genofondi quyidagilardan iborat",
       "words": {

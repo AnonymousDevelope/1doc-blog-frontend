@@ -20,6 +20,51 @@
     }
   },
   "home": {
+    "hero": {
+      "badge": "🚀 Innovative IT Solutions",
+      "title": "Digitize your",
+      "titleHighlight": "business",
+      "description": "Take your business to the next level with modern technologies. Solutions combining efficiency, security, and innovation.",
+      "ctaPrimary": "Get a free consultation",
+      "ctaSecondary": "View projects",
+      "stats": {
+        "projects": {
+          "number": "500+",
+          "label": "Successful projects"
+        },
+        "satisfaction": {
+          "number": "98%",
+          "label": "Customer satisfaction"
+        },
+        "support": {
+          "number": "24/7",
+          "label": "Technical support"
+        }
+      }
+    },
+    "features": {
+      "badge": "Why Choose Us",
+      "title": "Reasons Our Clients Value Us",
+      "description": "We guarantee an individual approach to each project and high-quality service",
+      "items": [
+        {
+          "title": "Fast Processing",
+          "description": "We complete projects in the shortest time with the highest quality"
+        },
+        {
+          "title": "Security Guarantee",
+          "description": "We ensure the safety and confidentiality of your data"
+        },
+        {
+          "title": "Professional Team",
+          "description": "An experienced team of specialists works on your project"
+        },
+        {
+          "title": "Efficiency Growth",
+          "description": "Optimizing your business processes and increasing efficiency"
+        }
+      ]
+    },
     "slider": {
       "title": "The gene pool of our project consists of",
       "words": {

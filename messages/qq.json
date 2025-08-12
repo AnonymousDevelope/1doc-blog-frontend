@@ -20,6 +20,51 @@
     }
   },
   "home": {
+    "hero": {
+      "badge": "🚀 İnnovaciyalıq IT sheshimler",
+      "title": "Biznesiñizdi",
+      "titleHighlight": "raqamlastırıñ",
+      "description": "Zamanagóy texnologiyalar arqalı biznesiñizdi keyingi basqışqa ótkiziñ. Samaralılıq, xavipsizlik hám innovaciyanı birlestirgen sheshimler.",
+      "ctaPrimary": "Pulsız maslahat alıw",
+      "ctaSecondary": "Loyihalardı kóriw",
+      "stats": {
+        "projects": {
+          "number": "500+",
+          "label": "Ámiyatlı loyiha"
+        },
+        "satisfaction": {
+          "number": "98%",
+          "label": "Mijazlar qanaatlandırıwı"
+        },
+        "support": {
+          "number": "24/7",
+          "label": "Texnik yordam"
+        }
+      }
+    },
+    "features": {
+      "badge": "Nege bizdi saylaydi",
+      "title": "Mijazlarimiz bizdi qadrli etetin sebepteri",
+      "description": "Biz her bir loyihaga individuallıq qaraw hám joqarı sapalı xızmet kórsetiwdi kepillestiremiz",
+      "items": [
+        {
+          "title": "Tez islep beriw",
+          "description": "Loyihalardı eń qisqa waqıtta hám joqarı sapada orınlaymız"
+        },
+        {
+          "title": "Qawipsizlik kepildi",
+          "description": "Ma'limatlarıńız qawipsizligi hám maxfiyligin qamtamasi etemiz"
+        },
+        {
+          "title": "Professional jamaa",
+          "description": "Tajribeli mutaxassislar jamaańız loyihada isleydi"
+        },
+        {
+          "title": "Samara artiwı",
+          "description": "Biznes jarayanlarıńızdı optimallashtırıw hám samara artırıw"
+        }
+      ]
+    },
     "slider": {
       "title": "Joybarımız genofondi tómendegilerden ibarat",
       "words": {
