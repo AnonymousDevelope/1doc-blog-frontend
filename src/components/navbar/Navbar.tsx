@@ -7,7 +7,6 @@ import { useRouter, usePathname, Link } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { Button } from "../ui/button";
 import { useLanguage } from "@/context/language.context";
-import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "@/context/theme.context";
 import { useTranslations } from "next-intl";
 
@@ -118,9 +117,9 @@ const Navbar = () => {
                 ))}
               </SelectContent>
             </Select>
-            <Button onClick={toggleTheme} variant="outline" size="sm">
+            {/* <Button onClick={toggleTheme} variant="outline" size="sm">
               {theme === "dark" ? <SunIcon className="!w-5 !h-5" /> : <MoonIcon className="!w-5 !h-5" />}
-            </Button>
+            </Button> */}
           </div>
         </div>
       </nav>

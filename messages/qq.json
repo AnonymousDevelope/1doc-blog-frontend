@@ -65,6 +65,11 @@
         }
       ]
     },
+    "blog": {
+      "badge": "Blog",
+      "title": "Eń sońǵı jańalıqlar hám maqalalar",
+      "description": "Tehnologiya álemindegi eń sońǵı jańalıqlar hám paydalı keńester"
+    },
     "slider": {
       "title": "Joybarımız genofondi tómendegilerden ibarat",
       "words": {

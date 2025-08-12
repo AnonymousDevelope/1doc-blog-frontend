@@ -65,6 +65,11 @@
         }
       ]
     },
+    "blog": {
+      "badge": "Blog",
+      "title": "So'nggi yangiliklar va maqolalar",
+      "description": "Texnologiya dunyosidagi eng so'nggi yangiliklar va foydali maslahatlar"
+    },
     "slider": {
       "title": "Loyihamiz genofondi quyidagilardan iborat",
       "words": {

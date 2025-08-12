@@ -21,7 +21,7 @@ const Blog = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await getBlogs(page, ITEMS_PER_PAGE, locale as string);  
+        const response = await getBlogs(page, ITEMS_PER_PAGE, locale as string);
         const recentBlog = await getBlogs(1, 4, locale as string); // Fetch recent blogs
         setRecentBlogs(recentBlog.blogs); // Set recent blogs state
         setBlogs(response.blogs);
@@ -77,7 +77,7 @@ const Blog = () => {
   const previousBlogs = recentBlogs.slice(0, recentBlogs.length - 1); // Blogs before the last one
 
   return (
-    <div className="max-w-6xl mx-auto px-2">
+    <div className="max-w-7xl mx-auto px-2">
       <h1 className="text-4xl font-bold mb-8 text-gray-900 dark:text-gray-100">
         Blog
       </h1>
@@ -130,7 +130,7 @@ const Blog = () => {
             Songi yangiliklar
           </h2>
           <div className="grid grid-cols-1 gap-3 px-2 md:grid-cols-2 md:px-2">
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-rows-3 gap-3">
               {previousBlogs.map((item) => (
                 <BlogCard
                   key={item.id}

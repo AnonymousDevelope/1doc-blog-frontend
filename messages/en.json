@@ -65,6 +65,11 @@
         }
       ]
     },
+    "blog": {
+      "badge": "Blog",
+      "title": "Latest news and articles",
+      "description": "The latest news and useful tips from the world of technology"
+    },
     "slider": {
       "title": "The gene pool of our project consists of",
       "words": {

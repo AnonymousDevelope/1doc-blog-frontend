@@ -34,7 +34,7 @@ const InfoPanel = () => {
           <div className="flex flex-row items-center">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline">{t("connect")}</Button>
+                <Button variant="outline" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">{t("connect")}</Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
