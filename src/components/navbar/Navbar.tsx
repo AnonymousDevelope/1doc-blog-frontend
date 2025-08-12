@@ -7,7 +7,6 @@ import { useRouter, usePathname, Link } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { Button } from "../ui/button";
 import { useLanguage } from "@/context/language.context";
-import { useTheme } from "@/context/theme.context";
 import { useTranslations } from "next-intl";
 
 interface NavbarItem {
@@ -23,7 +22,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const selectedLanguage = locale;
   useEffect(() => {
     if (selectedLanguage !== contextLanguage) {
