@@ -135,5 +135,38 @@
         "answer": "Jeke maǵlıwmatlarıńızdı qorǵaw ushın qosımshada ámelge asırılǵan qáwipsizlik standartları hám protokolları haqqındaǵı maǵlıwmatlar rásmiy veb-saytta jaylastırılǵan Qáwipsizlik siyasatında keltirilgen."
       }
     }
+  },
+  "contact": {
+    "title": "Biz benen baylanıń",
+    "description": "1doc.uz - iskerler tárepinen iskerler úshin jasalǵan loyıha. Bul loyıha hujjatlar menen islewde eń az qáreket hám shıǵın talab etedi.",
+    "name": "Atıńız",
+    "name_placeholder": "Atıńız hám familiyańızdı kiritiń",
+    "name_error": "Atı hám familiya kiritiw shárt",
+    "email": "Email",
+    "email_placeholder": "Email adresińizdi kiritiń",
+    "email_error_required": "Email kiritiw shárt",
+    "email_error_format": "Násaz email formatı",
+    "phone": "Telefon",
+    "phone_placeholder": "Telefon nomerińizdi kiritiń",
+    "phone_error_required": "Telefon nomeri kiritiw shárt",
+    "phone_error_format": "Násaz telefon nomer formatı",
+    "company": "Kompaniya",
+    "company_placeholder": "Kompaniyańız atın kiritiń",
+    "team_size": "Komanda kúlemi",
+    "team_size_placeholder": "Saylań",
+    "profession": "Kásibińiz",
+    "profession_placeholder": "Saylań",
+    "country": "Mámleket",
+    "country_placeholder": "Saylań",
+    "message": "Sizge qánday yordam beremiz?",
+    "message_placeholder": "Habarińizdi kiritiń...",
+    "message_error": "Habar kiritiw shárt",
+    "submit": "Baylanıń",
+    "testimonial_name": "Davronbek Sanakulov",
+    "testimonial_role": "1DOC Basqarıw Shayisi",
+    "toast_error_title": "Hámmesin toldırıń",
+    "toast_error_description": "Tómendegi qáteliklerdi túsiriń",
+    "toast_success_title": "Habarińiz jiberildi!",
+    "toast_success_description": "Biz tez arada siz benen baylanamız"
   }
 }

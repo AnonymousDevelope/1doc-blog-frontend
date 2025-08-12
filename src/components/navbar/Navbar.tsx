@@ -56,20 +56,26 @@ const Navbar = () => {
       <Button
         variant="outline"
         size="icon"
-        className="sm:hidden fixed right-4 top-1/2 z-[1000] -translate-y-1/2"
+        className="sm:hidden fixed right-4 top-1/2 z-[9999] -translate-y-1/2"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {isMenuOpen ? "✕" : "☰"}
       </Button>
-
       <nav
-        className={`${styles.navbar} sticky top-0 border-b-2 border-background dark:border-gray-800 shadow-md dark:shadow-gray-800/50 z-50`}
+        className={`${styles.navbar} sticky top-0 border-b-2 border-background dark:border-gray-800 shadow-md dark:shadow-gray-800/50 z-50 bg-background/50`}
       >
         <div className="flex w-full items-center justify-between px-4 py-2 mx-auto ">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-3">
               <Image src="/1doc-logo.png" width={40} height={40} alt="1Doc Logo"  />
-              <span className="font-bold text-2xl md:text-3xl ">Doc</span>
+              <span className="font-bold text-2xl md:text-3xl">
+                1
+                <span
+                  className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent"
+                >
+                  Doc
+                </span>
+              </span>
             </Link>
           </div>
           <ul

@@ -135,5 +135,38 @@
         "answer": "Information about the security standards and protocols implemented in the application to safeguard your personal data is provided in the Privacy Policy available on the official website."
       }
     }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "1doc.uz is a project created by entrepreneurs for entrepreneurs. It requires minimal effort and costs when working with documents.",
+    "name": "Name",
+    "name_placeholder": "Enter your full name",
+    "name_error": "Full name is required",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "email_error_required": "Email is required",
+    "email_error_format": "Invalid email format",
+    "phone": "Phone",
+    "phone_placeholder": "Enter your phone number",
+    "phone_error_required": "Phone number is required",
+    "phone_error_format": "Invalid phone number format",
+    "company": "Company",
+    "company_placeholder": "Enter your company name",
+    "team_size": "Team size",
+    "team_size_placeholder": "Select",
+    "profession": "Profession",
+    "profession_placeholder": "Select",
+    "country": "Country",
+    "country_placeholder": "Select",
+    "message": "How can we help you?",
+    "message_placeholder": "Enter your message...",
+    "message_error": "Message is required",
+    "submit": "Contact",
+    "testimonial_name": "Davronbek Sanakulov",
+    "testimonial_role": "Chairman of 1DOC",
+    "toast_error_title": "Please fill out all fields",
+    "toast_error_description": "Fix the errors below",
+    "toast_success_title": "Your message has been sent!",
+    "toast_success_description": "We will contact you shortly"
   }
 }

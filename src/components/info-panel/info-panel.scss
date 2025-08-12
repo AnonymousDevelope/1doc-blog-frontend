@@ -1,17 +1,42 @@
 .info-panel {
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+    
     .info-list {
-        font-family: "Roboto", sans-serif;
-        span {
-            position: relative;
-            padding: 0.5rem 0;
-            /* Minimal, maksimal va o'zgaruvchan hajm */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            /* Uzun matnni ellips bilan qisqartirish */
-            white-space: nowrap;
-            /* Matnni bir qatorda ushlab turish */
-            display: inline-block;
-            @apply lg:text-[16px] dark:text-foreground text-[#4A4A4A];
+      @apply container mx-auto;
+      
+      > div {
+        @apply flex items-center;
+        
+        &:not(:last-child) {
+          @apply border-r border-gray-200 dark:border-gray-700 pr-4;
         }
+      }
     }
-}
+  }
+  
+  // Mobile button animation
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  .info-panel-mobile-btn {
+    @apply fixed bottom-6 right-6 z-50 flex items-center justify-center 
+           h-14 w-14 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 
+           text-white shadow-lg transition-all duration-300;
+    
+    &:hover {
+      animation: pulse 1.5s infinite;
+      @apply shadow-xl;
+    }
+    
+    svg {
+      @apply h-6 w-6;
+    }
+    
+    span {
+      @apply sr-only;
+    }
+  }

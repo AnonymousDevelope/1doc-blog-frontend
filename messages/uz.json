@@ -135,5 +135,38 @@
         "answer": "Shaxsiy ma’lumotlaringizni himoyalash uchun ilovada amalga oshirilgan xavfsizlik standartlari va protokollari haqidagi ma’lumotlar rasmiy veb-saytda joylashtirilgan Maxfiylik siyosatida keltirilgan."
       }
     }
+  },
+  "contact": {
+    "title": "Biz bilan bog'laning",
+    "description": "1doc.uz - tadbirkorlar tomonidan tadbirkorlar uchun yaratilgan loyiha. Bu loyiha hujjatlar bilan ishlashda eng kam harakatlar va xarajatlarni talab qiladi.",
+    "name": "Ism",
+    "name_placeholder": "Ism va familiyangizni kiriting",
+    "name_error": "Ism va familiya kiritilishi shart",
+    "email": "Email",
+    "email_placeholder": "Emailingizni kiriting",
+    "email_error_required": "Email kiritilishi shart",
+    "email_error_format": "Noto'g'ri email formati",
+    "phone": "Telefon",
+    "phone_placeholder": "Telefon raqamingizni kiriting",
+    "phone_error_required": "Telefon raqam kiritilishi shart",
+    "phone_error_format": "Noto'g'ri telefon raqam formati",
+    "company": "Kompaniya",
+    "company_placeholder": "Kompaniyangiz nomini kiriting",
+    "team_size": "Jamoa hajmi",
+    "team_size_placeholder": "Tanlang",
+    "profession": "Kasbingiz",
+    "profession_placeholder": "Tanlang",
+    "country": "Mamlakat",
+    "country_placeholder": "Tanlang",
+    "message": "Sizga qanday yordam beramiz?",
+    "message_placeholder": "Xabaringizni kiriting...",
+    "message_error": "Xabar kiritilishi shart",
+    "submit": "Bog'laning",
+    "testimonial_name": "Davronbek Sanakulov",
+    "testimonial_role": "1DOC Boshqaruv Raisi",
+    "toast_error_title": "Iltimos, barcha maydonlarni to'ldiring",
+    "toast_error_description": "Quyidagi xatolarni tuzating",
+    "toast_success_title": "Xabaringiz yuborildi!",
+    "toast_success_description": "Biz tez orada siz bilan bog'lanamiz"
   }
 }
